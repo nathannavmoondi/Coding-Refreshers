@@ -1,0 +1,9 @@
+Data Filter From TextBoxes
+
+add sqldatasource
+
+add text boxes
+
+add listbox, datagribe, etc.
+
+in sqldatasource make where clause source come from text box (MIN RANGE, MAX RANGE)

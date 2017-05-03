@@ -1,0 +1,49 @@
+web api
+
+install from nuget
+
+install as project web api
+
+modify web.config to change'routing'
+
+great for non-soap services
+
+supposedly better than wcf.   it's new.
+
+makes everyting extensible.  replace almost everything.
+
+map uris and verbs to controller
+
+first developed at codeplex.
+
+use http protocol
+
+WCF remains the framework for building services where you care about transport flexibility. WebAPI is the framework for building services where you care about HTTP.
+
+define 'end points'.  also needed for wcf.
+
+The WCF Web API abstractions map to ASP.NET Web API roughly as follows
+
+WCF Web AP -> ASP.NET Web API
+Service -> Web API controller
+Operation -> Action
+Service contract -> Not applicable
+Endpoint -> Not applicable
+URI templates -> ASP.NET Routing
+Message handlers -> Same
+Formatters -> Same
+Operation handlers -> Filters, model binders
+and http://wcf.codeplex.com/discussions/319671
+
+The integrated stack supports the following features:
+
+Modern HTTP programming model
+Full support for ASP.NET Routing
+Content negotiation and custom formatters
+Model binding and validation
+Filters
+Query composition
+Easy to unit test
+Improved Inversion of Control (IoC) via DependencyResolver
+Code-based configuration
+Self-host

@@ -1,0 +1,49 @@
+setup in web.config variuos heartbeat events
+
+connect to sqlprovider info.
+
+when exception generated or heartbeat generated (site is live) - row created in sql table.
+
+<healthmonitoring enabled="true">
+<rules>
+ <add name="my rule" eventname="All Errors" provider="SqlWebEventProvider">
+
+email
+------
+
+cansetup to email when there's a problem.
+
+setup email provider
+
+<healthmonitoring>
+<providers>
+<add name="EmailProvider"
+ type="system.webmanagement.etc."
+ from "admin@my.com"
+ to "webfaults@my.com"
+>
+</healthmonitoring>
+
+custom web events
+------------
+
+derive from existin webevent class
+
+webbaseevent
+webrequestevent
+webrequesterrorevent
+
+must pass event code to baseclass constructor
+
+public class CusomEvent : WebRequestEvent
+{
+ public cxonst int eventcode = webevent.webextendedbase +10;
+
+ public CustomEvent(string message, object eventsource)
+ : base (message, eventsource, Eventcode)
+
+ public enum MyEventcode : int {
+   WidgetCreated  = 1,
+   WidgetDeleted  = 2,
+ }
+}

@@ -1,0 +1,29 @@
+add new item
+create "resource file"
+goes in app_resources folder
+creates mystrings.resx
+
+add name, value, comment
+
+eg: "namelabeltext", "Nom", "this is the name"
+eg: "fromlabeltext", "From", "this is from"
+
+** access
+
+namelabel.text = Resources.NameLabelText;
+
+
+** name
+
+default.aspx.fr.resx
+default.aspx.resx
+orderpage.aspx.resx
+
+** find out language
+
+thread thread = thread.currenthread;
+
+cultureinfo uiculture = thread.currentuiculture;
+cultureinfo culture = thread.currentculture;
+
+culture.numberformat.currencysymbol;

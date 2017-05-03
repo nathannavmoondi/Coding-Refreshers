@@ -1,0 +1,10 @@
+use nueget to get nunit.
+
+add refernce to nunit.frameworks. watch mvc tutorial.  
+
+add refence to system.web.mvc
+
+cretaest myproject.Tests projects.
+
+
+add identifier [TestFixture] over controller class.

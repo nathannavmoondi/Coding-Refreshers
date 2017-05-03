@@ -1,0 +1,7 @@
+<%# 7 + 4 %>
+
+pageload : this.databind();
+
+public string name = "Joe";
+
+<%# name %>

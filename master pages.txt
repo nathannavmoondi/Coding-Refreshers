@@ -1,0 +1,46 @@
+master page:
+
+stuff
+
+<asp:contentplaceholder><asp:contentplaceholder/>
+
+stuff
+
+* use tables.  great.
+
+content page:
+
+header is <%@ MasterPageFile="~/masterpage.master" />
+
+<asp:content id="xx" contentplaceholderid="xx" > content </>
+
+delete body head form elements.
+
+Page Title="" in header.
+
+theme:
+
+to specify theme , add it in web.config.   (pages element, themes="skinfile").
+
+find controls on master page:
+
+label thelabel = Master.FindControl("HeadingLabel") as Label;
+
+(always check for null)
+
+master page inclusion:
+after page directive.
+<%@ MasterType VirtualPath="~/masterPage.master" %>
+
+master page functions:
+
+in master page, specify code behind file.
+
+
+public string HeadingLabelText
+{
+get {return label.text;}
+set { label.text = value;}
+}
+
+Master.HeadingLabel = s;

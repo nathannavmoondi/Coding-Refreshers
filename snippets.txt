@@ -1,0 +1,4 @@
+* right click, insert snipppet
+
+* in toolbar, go to general area drag/drop.
+

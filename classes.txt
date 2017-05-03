@@ -1,0 +1,38 @@
+public class State
+{
+private string name;
+private string abbr;
+
+public string Name
+{
+  get {return name; }
+}
+
+public string Abbreviation
+{
+ get { return abbreviation; }
+}
+
+public State (string n, string abb)
+{
+ name = n;
+ abbr = abb;
+}
+
+}
+
+INSTATIATE
+
+stateObjects.Add( new State("Texas", "TX") );
+
+-------------
+
+: base (item) // deriving from base class
+
+-----------
+
+virtual - keyword to allow function to be overwritten
+
+---------
+
+override - keyword to create new function to override function in base class

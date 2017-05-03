@@ -1,0 +1,232 @@
+ 
+1. He asked me to write a function that checks duplicates in array and then asked me to rewrite it 3 more times to make it faster and faster
+2. He asked me to write a function that returns a random point inside the circle, I couldn't  recall the math formula for point inside the circle, so he reminded me, and then I completed the task
+ 
+3. write a javascript function to return factorial of n, in which n is the number of times the function is called. For example, 1st time call it, nextFactorial() = 1, 2nd time,  nextFactorial() = 1x2 = 2, 3rd time, nextFactorial() = 1x2x3 = 6, 4th time, nextFactorial() = 1x2x3x4 = 24, etc.
+ 
+4. You are to write a university Interactive Voice Response (IVR) system.
+The prompt is "Please enter the last 2 digits of your graduation year".
+ 
+If a 2-digit year can match a year between 50 years into the past and 10 years into the future,
+return the matching full-digit graduation year. Otherwise return -1.
+ 
+// tdy stands for 2 digit year; 0 - 99
+// cy is 4-digit current year 50 - 9999
+int GetYear(int tdy, int cy)
+{
+var year = prompt("Please enter last 2digits of yor gad year")
+call get year(year,currentyear);
+
+prompt to get value.
+loop -1 to -50.  then loop 1 to 10.
+get current year-x year.
+substr(2,2) of this value equal to last 2 digits(tdy)?  choose that year. 
+return -1 or that year. alert.
+
+                [start coding here]
+ 
+}
+
+
+------
+
+/**
+* Get any duplicates in an array
+* @param arr - An array potentially containing duplicates
+* @return An array of duplicates found in @param arr
+**/
+function getDuplicates(arr) {
+var uniq = arr.map((name) => {
+ return {count: 1, name: name} // new object with count.
+}).reduce((a, b) => {
+ a[b.name] = (a[b.name] || 0) + b.count;  // so a["john"] = 1; a["bob"] = 2, etc.
+return a
+}, {})
+
+//get keys for array. the names.
+//call filter on each with where clause. 
+//test key with uniq array above.  creates new array.
+var duplicates = Object.keys(uniq).filter((a) => uniq[a] > 1)
+
+//return a[]'s where value > 1;
+
+return duplicates;
+//map to new object. reduce to new object with unique keys. then filter if count >1.
+}
+
+function return_duplicates(arr){
+
+var len = arr.length;
+var out = [];
+var keys = [];
+
+for (var i = 0; i<len; i++)
+{
+  var key = arr[i]; // "john"
+  if keys[key] >= 1
+    keys[key] = keys[key] + 1;
+  else
+    keys[key] = 1;
+  
+  if (keys[key] >= 2)
+    out.push(item);
+}
+return out;
+}
+
+function find_duplicates(arr) {
+  var len=arr.length,
+      out=[],
+      counts={};
+
+  for (var i=0;i<len;i++) {
+    var item = arr[i]; // get value. use as key
+    if temp arr's value for key is == 1, add 1.  
+    counts[item] = counts[item] >= 1 ? counts[item] + 1 : 1;
+    oh no.  we hit 2.  push it to our dupliates array.
+    if (counts[item] === 2) {
+      out.push(item);
+    }
+  }
+
+  return out;
+}
+
+
+--------
+
+/**
+* Outputs a random point inside a circle of radius R as an array [x,y]
+* @param R - The radius of the circle
+* @return An array of [x,y] for a random point inside the circle
+**/
+function getRandomPointInCircle(R) {
+var a = Math.random();
+var b = Math.random();
+
+// if B > A, flip them so the math works
+if(b < a) {
+var tmp = a;
+a = b;
+b = a;
+}
+return [(b*R*Math.cos(2*Math.PI*a/b), b*R*Math.sin(2*Math.PI*a/b))];
+}
+
+----
+
+/**
+* Outputs a factorial based on the number of times the function was called
+* @return A factorial based on the number of times the function was called
+**/
+function nextFactorial() {
+if (typeof factorialCalls === 'undefined' || !factorialCalls) {
+// define without var to force global
+factorialCalls = 0;
+}
+factorialCalls++;
+var sum = 1;
+for(var i = 1; i <= factorialCalls; i++) {
+sum *= i;
+}
+return sum;
+}
+
+
+function nextFactorial()
+{
+if (typeof factor === 'undefined')
+{ factor = 0;} 
+factor++;
+var sum = 1;
+for (int i=0; i<factor; i++)
+{
+ sum *= i;
+}
+return sum;
+}
+
+The prompt is "Please enter the last 2 digits of your graduation year".
+ 
+If a 2-digit year can match a year between 50 years into the past and 10 years into the future,
+return the matching full-digit graduation year. Otherwise return -1.
+ 
+// tdy stands for 2 digit year; 0 - 99
+// cy is 4-digit current year 50 - 9999
+
+int GetYear(int tdy, int cy)
+{
+
+
+[start coding here]
+return -1 or the graduation year. 
+}
+
+<body>
+Enter year: <input id="numb" value="">
+<button type="button" onclick="myFunction()">Submit</button>
+<p id="demo"></p>
+<script>
+function myFunction() {
+    var x, text;
+	var d = new Date();
+    var n = d.getFullYear();
+    x = document.getElementById("numb").value;
+	var z = (n + 10);//2027
+	var w = (n - 50);//1967
+	//var w = (n - parseInt(text));
+        if (isNaN(x) && x <= 67 || x <= 17 ) {
+        	text1 = 20+x;
+   		}
+		 else {
+       		text1 = 19+x;
+  		}	
+		if (text1 <= z && text1 >= w )
+		 {
+			text2 = text1	
+		}
+		 else {
+			text2 = "-1";
+		}
+    document.getElementById("demo").innerHTML = text2;
+}
+</script>
+</body>
+</html>
+
+// tdy stands for 2 digit year; 0 - 99
+// cy is 4-digit current year 50 - 9999
+// call: GetYear(95,2017)
+int GetYear(int tdy, int cy)
+{
+
+var beginyear = cy-50; //1967
+var endyear = cy+10; // 2027
+
+var gradyear = -1;
+
+for(int x=beginyear; x<endyear; x++)
+{
+if (x.substr(2,2) === tdy) //ie (95 = 95))
+ gradyear = x;
+}
+return gradyear;
+}
+
+--------
+CREATE TABLE STATION  (ID INTEGER PRIMARY KEY,  CITY CHAR(20),  STATE CHAR(2), 
+LAT_N REAL, LONG_W REAL);
+
+INSERT INTO STATION VALUES (13, 'Phoenix', 'AZ', 33, 112); 
+
+SELECT * FROM STATION  WHERE LAT_N > 39.7;
+SELECT MONTH, ID, RAIN_I, TEMP_F FROM STATS ORDER BY MONTH, RAIN_I DESC;
+SELECT COUNT(1) FROM student; 
+
+UPDATE STATS SET RAIN_I = 4.50 WHERE ID = 44;
+COMMIT WORK;
+DELETE FROM STATS  WHERE MONTH = 7 OR ID IN (SELECT ID FROM STATION WHERE LONG_W < 90);
+
+MAX(age) LIKE ‘d%n’; EXPLAIN QUERY PLAN SELECT * FROM student;BETWEEN value1 AND value2;
+distinct (unique), COUNT(*)
+

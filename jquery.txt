@@ -1,0 +1,227 @@
+hello word
+
+-----
+
+$("document").ready(
+ function() {
+   alert("Hello World");
+ }
+);
+
+---------
+
+JQuery overview:
+
+Take selection and traversal.  combine with manipulation of CSS.
+
+then Events, Effects, UI, Extensibility and Ajax.
+
+----------
+
+jQuery SELECTOR returns criteria of content from DOM as "jquery objects".
+
+-------
+
+example Jquery Selectors:
+
+$("p");  easier than document.GetElemtnByTagName("p");
+
+$("#list1");  all list1 tags
+
+$("li.a");
+
+$("ul.b");
+
+$(".a").css("border", "3px solid red");
+--------
+
+Filters:
+
+Work with Selectors to provide more fine control.
+
+categories: basic, content, visibility, attribute, child and form.
+
+:first, :last, :even, od, eq(n), gt(n), lt(n), header (all header elements), animated, not(selector)
+
+$("p:not(p:eq(2))").css(...)
+
+-------
+
+Attributes
+
+$("p[id=para1]").css
+
+-----------
+
+content
+
+$("li:contains(3)")  // text '3'
+
+-----
+
+form selectors
+
+$("form :input").before("INPUT: ");  // all input controls
+$("FORM :text:enabled").before("ENABLED: ");
+
+-----
+
+traverse
+
+alert("there are " + $("p").size() + "<p> elements");
+var elems = $('li').get(); // # of tags
+
+$("ul").find("li.b").css("border", "3px solid red");
+
+var leftmargin = 0;
+var border = 3;
+
+$("p").each(function () {
+ $(this).css("border", border + "px solid red");
+});
+--------
+
+Statement Chaining (multiple functions)
+
+------
+
+Set Content
+
+$("#list1").html("<li>This is the new list item</li>");
+
+var newitem = $("<p>New paragrph</p>");
+$(#para2").html(newitem.html());
+
+$("p").append("with some content");
+
+-----
+
+Set Attributes
+
+$("a").attr("target", "_blank");
+$("img").attr({src:"iamges/spring.jpg", alt:"Spring"});
+
+---------
+
+Functions
+
+$("document").ready( function() {
+ buildBookMarks('h3', 'header');
+});
+
+function BuildBookMarks(strWhichTag, sBookMarkNode)
+{ 
+}
+------
+
+Events
+
+$("#evtTarget").bind("mouseover", highlight);
+
+function highlight(evt) {
+ $("#evtTarget").toggleClass("highlighted");
+}
+
+also
+
+$("#evtTarget").toggle(fnclick1, fnclick2); 
+----------
+
+Event Properties
+
+$("div").click(function(evt) {
+ $(this).html("pageX: " + evt.PageX + ", PageY: " + evt.PageY);
+});
+
+$("div").one("click", function(evt) { --- only fires ONCE
+
+------
+
+AddClass
+
+$("#thelist tr:even").addClass("stripe1");
+
+-------
+
+JQuery Animation Effects
+
+show, hide, toggle, fade, // speed, callback
+slide, slideup, slidetoggle,
+
+
+$("#show").click(function()( {
+ $("#thediv").show("slow");
+//$("thediv").show(5000, function() { alert("done showing"); }
+};
+
+---------
+
+custom animation
+
+animate(params, duration, easing, callback)
+
+$("#right").click(function() {
+ $("#thediv").animate({ width: "500px"), 1000);
+});
+
+--------
+
+JQuery UI Library
+
+interactions: draggable, droppable, resizable, selectable, sortable
+widgets: accordian, datepicker, progressbar, dialog, slider, tabs
+effects: add class, remove class, toggle, switch, hide, show, toggle, color animation
+
+jqueryui.com for demo and html
+
+example: 
+
+<style type=text/css>
+#resizable{ width: 160px; height: 150px etc.
+</style
+
+<script type = text/javascript>
+ $(function () {
+    $("#resizable".resizable();
+ });
+</script>
+
+-------
+
+themes
+
+jqueryui.com/themeroller
+
+chagnes colors of jui controls
+
+download CCS files you can incorproate into site.
+
+------------
+
+Incorporating
+
+1) Create DIVs, ID, CSS, whatever for elements you want to modify
+2) Add JQuery to page
+3) Add function() at top and include JQuery code.
+
+eg:
+
+<script type="text/javascript"<
+ $(function() {
+ 	var maxw = $("#commentsSection").width();
+	var minw = maxw;
+	var minh = $("#commentsSection").height();
+	$("#commentsSection").resizable({
+	maxwidth: maxw,
+	minHeight: minh,
+	minWidth: minwidth});
+ });
+</script>
+
+make textbox resizable.
+	
+-----------
+
+
+
+

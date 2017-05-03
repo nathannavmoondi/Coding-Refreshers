@@ -1,0 +1,36 @@
+data sources only in windows apps
+
+dragging table to form creates .xsd files and various non-visual elements on page (binding navigator, binding source, tableadapter, dataset, etc.)
+
+drag/drop in asp .net creates gridview in comparison (and sqldatasource).
+
+sqltableadapter not sqldataadapter
+
+wpf and fancy ui's
+
+app settings
+
+MyPage page = new MyPage();
+page.Show();
+
+* bindingsource
+
+  itembindingsource.endedit()  to get out of edit mode.  // you're NOT using a datagrid but controls binding to a binding navigator/data adapter, etc. PAGE CONTROLS ARE BOUND.
+
+* events
+
+  bindingsource_positionchanged
+
+  check controls, save, fillanother datasource, etc.
+
+* saving
+
+  saveitem_click
+
+  itembindingdatasource.current // returns datarowview
+  this.validate
+   .endedit // tableadapter.updateall
+
+  itembindingsource.filter - "name like %tom%';
+
+* dbml ways to create visual represenation of data context object.  use for linq to sql

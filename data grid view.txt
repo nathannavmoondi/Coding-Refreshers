@@ -1,0 +1,11 @@
+selectedindexchanged event
+
+int x = e.newselectedindex;
+
+string text = gridview1.rows[x].cell[0].text;
+
+CheckBox continued = gridview1.rows[x].cell[0].controls[0] as checkbox;
+
+string id = gridview1.datakeys[x].value; or (after selctedindexchanged event) gridview1.selecteddatakey.value;
+
+

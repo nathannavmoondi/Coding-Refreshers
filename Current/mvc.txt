@@ -1,0 +1,183 @@
+* check routevalues var controller = RouteData.Values["controller"];  add to viewbag.
+* return Json(new { msg ="Passed"}, Json.Allowget) to allow actions to return Json.
+* code blocks contain C# code @{ }
+* put partial views in shared folder so everyone can access it
+* Html.Action is great for returning partial views. return PartialView("_view",model);
+* first time u access db eg: login, ef will create the database localdb make sure set conn string
+* see length=7 in url, picked wrong overload in actionlink
+* for posts [Bind(Include, Exclude, Prefix="")]
+* ajax.beginform needs ms jquery unobtrusive ajax
+
+using (Ajax.BeginForm(new AjaxOptions()
+{
+    HttpMethod = "get",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "restaurantList"
+})){
+
+<input type="text" name="searchTerm" value=""/>
+<input type="submit"  value="Search By Name" />
+}
+
+<div id="restaurantList"></div>.  posts back to same controller/index as form with form values.
+
+* Have Ajax call action that returns partial view  not entire page to replace div with.
+* Alternatively, use index action but check ajax: 
+if (Request.IsAjaxRequest())
+                return PartialView("_Restaurants", model);
+
+            return View(model);
+* main view uses @html.partial view to display page intiially. then ajax replaces that div later
+* @Url.Action = ful url of that action in view's controller
+* PagedList.mvc for paging. need to hookup anchors to make ajax calls instead of gets
+* logging: install elmah.mvc go to localhost/elmah to see error logs etc.
+* create anonymous array of objects : var courses = new[]{            {
+                new CourseVm() {Number = "CREA101", Name = "Care of Magical Creatures"};
+            
+* replace double apostrophe with single data.Replace("\"", "'");
+* everything good in action but don't want to return view : return new HttpStatusCodeResult(HttpStatusCode.OK);
+
+* camel case in web api, insert 2 lines in webapiconfig to always convert to camel case.
+
+* to make /registration point to registration.html dl iis rewrite module then modify web.config
+
+* System.Diagnostics.Debugger.Break instead of breakpoints when debugging
+* glyphicons to have cool icons.  glyphicon glyphicon-trash
+* when overriding virutal methods, do call the base method for other functionality. base.Edit()
+* don't forget ; when adding @html.textbox and html in @using (Html.BeginForm){ }
+* Format string in view :  @String.Format("{0:F}",@Model.Price)
+
+* for ajax, put in jquery.unobtrusive.AJAX.*
+* novalidate = browser doesn't validate
+
+* api calls expect HttpStatusCode returned.  eg: 201, etc.
+* dnvm dot net version managfer to check .net version in console. dnvm upgrade makes latest version
+* vs 2015 needs asp.net core dl to use dot net core
+* .net core has project.json instead of web.config
+* dnx is execution environment. command that points to project and runs it. "dnx run" in sol folder
+* npm is like nutget. npm install xxx
+* vs code: yeoman can create .net core templates. npm install yo -g (globally) then yo aspnet
+* vstudio: instlal 'add new file' vs extension and 'open command line' and web essetnaisl.  
+* startup.cs has main()
+
+* css rules are just json style objects #sidebar { color: #eee; } withotu quotes.
+
+* add mvc to .net core: in startup clas, configureservices method.  services.AddMvc(); make sure mvc added to project.json. microsoft.aspnet.mvc
+
+* in configure method.  app.usestaticfiles() and app.usemvc(config => confg.maproute(name, template)
+* asp.net5 attributes: asp-controller="app" and asp-action="about" in urls
+* asp-validation-for="Name.  html helpers are now dash attributes.
+* $"contact page from {model.name}" - where model is an existing object
+* use dnx to add migrations: dnx ef migrations add initialdatabase. add seeder class not override -ef7
+* if (env.IsDevelopment() { logger stuff }; 
+* after publishing, run web.cmd to run webserver and app. then use http://localhost:5000. no iis
+* dnu = dot net utility.  publish from commandline. build/install dependencies/publish/list dependec.
+* to run on other machine, run dunu with runtime copy. --runtime dnx-clr-win-x64.1.0.0.beta
+
+* font-awesome better than bootstrap own glyphs
+* copy font-awesome.css and \fonts\font-awesome fonts <div class="fa fa-3x fa-arrow-left">
+* moment.js for date operations.  quite big.
+* bootstrap github datepicker: $('input[name='startdate']').daterangepicker();
+
+* create mvc html helper: public static MvcHtmlString SubmitButton(this HtmlHelper htmlHelper,
+      string buttonText, object htmlAttributes = null)
+* submit button builds html string and returns mvchtmlstring
+
+* between @using don't need @ but if put div, then need to add @ before C# since ur between html
+* WebApi should return IHttpActionResult
+* WebApi: Both OK and NotFound return IHTTPActionResult objectgs. OK with data wrapped in it.
+* WebApi: when addeding webapi, need webapiconfig.cs in app_start
+* WebApi: then in global.asx  GlobalConfiguration.Configure(WebApiConfig.Register);
+* WebApi: setup jsonFormatter using newtonsoft jsonformatter in global.asx for webapi
+
+* throw own error that angular/clients can see:  throw new ApplicationException("Error in the get method");
+client checks exceptionMessage property
+* Web API can have multiple get's by specifyign diff: [Route("api/Category/GetSearchCategories")] 
+* with json code, web api always returns camel case.  make js always camel case to prevent issues
+
+* after put. getback object and replace internal collection with updated data.  use map() to create
+array of id's, get index of that id, then replace that object using that index. 
+* pristine = form has not been touched. default state
+* integers are NOT NULLABLE
+* @html.hidden(@viewbag.ninjaid) if not pased as paramater refer as : request.form["NinjaId"]; use
+int.TryParse() to ensure value.
+
+* identity: userId is a GUID.  userName is a string.
+* create TODO list of what to do. create/add/update 
+* pro9perty is CategoryID.  Want to create dropdown for edit/add?  Viewbag.CategoryId = new SelectList(
+db.categories, "categoryid", "categoryname"). then create @html.dropdownlist("categoryid", string.empty)
+* each controller is a menu list.  create actions within that controller: list, edit, delete, posts
+
+* SortOrder change in view: new {sortOrder = (ViewBag.SortOrder==null?"Asc": (ViewBag.SortOrder=="Asc"?"Desc": "Asc")}
+* Vbg.TotalPages = math.ceiling(db.customers.count() / 10.0);
+* then for i=1, etc. <a>html.actionlink(), page=@i</a>  then .skip(page*10).take(10);
+* show errors? put into TempData["msg"] = "Deleted";
+* @if TempData["msg"]!=null{ h3 @TempDAta["msg"].ToString(); }
+* for CRUD every domain should get own controller to list, delete, edit, etc.
+* build reposotiroes.  then unitofwork that encompasses all categories.  then use that.
+
+* return Json from mvc action: return Json(new { name="serial"}, JsonRequestBehavior.allowget);
+* action attributes: authorize roles, outputcaching, httppost, custom filter ie: logfilter
+* razor helper: @helper formatAmount(decimal amount) { var color="green";<span style="color:@color">); in view file.   then @{ code: <li>@formatAmount(amount)</li> }
+* add glyphs: <a class="btn"><span class="glyphicon glyphicon-arrow"></span>Print</a>
+* url.action only returns url - html.actionlink returns entire a element
+* set name in view: [Display(Name="First Name")]
+* custom property: public string Name{ get { return "hi";} set{ } }
+* azure type: on-premises =everything, infrastrucre as service: u do app/os they do hardware, platform as
+service=you do app, they do os/hardware
+* mocking: fakedbset = db = new fakedbcontext.  db.checking = new fakedbset<checking>; db.checking.add();
+* tdd: make test.  make it fail.  make it pass. improve code.  test again. pass mockdbcontext to
+repository or controller.  do action.  test dbset.
+
+* validation fails in post: modelstate.addmodelerror("field", "errormsg"). then check for isvalid then return view.  shows error in validation summary or validation field msg
+* data annotations are for both client side and server side (modelstate.isvalid) checks
+* Thread.Sleep(5000); to insert delay
+* checktime of code: var w= new StopWatch();w.start(); add to viewbag.
+* multithreading: Task<string> t1 = Task.Factory.startNew<string>(db1.GetData1);
+* Task.WhenAll(t1); var s = t1.Result; starts new thread and continues executions. non blocking.
+* webgrid: @{ var grid = new WebGrid(Model.Customers); in view @grid.GetHtml();
+* if field is decimal.  creates validation error cuz can't be null.  set to numeric or zero.
+* token = anti forgery.  server sends token that expires that needs to be sent.  prevetns crsf cuz no token
+* @html.AntiForgeryToken() generates token.  [validateantiforgery] ensures valid tokien was received
+* xss: for query strings and input NEVER run them on database or save them without verifying.
+eg: saving <script>alert('hi'); in textbox. mvc automatically strips bad code from inputs.
+* use html.raw if you want html rendered from database. to save html put [ValidateINput(false)] on action
+in model put [AllowHtml]
+* why mvc? behind code not reusable. fat code. streamline mv and c. unit testing. fixed response types tight couplling with page and code
+* mvc collections: array, list, hashtable, sortedlist, stacks, queues, string colections, dictionary
+* resizable and generic use any object, arraylist.  for fixed use arrays. arrays much faster
+* @url.routeurl("login") and @html.RouteLink("Click here", "login") generate same anchor tag. 
+
+* authorization membership providers. webmatrix. or formsauthentication.signout() or classes derived from role provider. (isinrole() etc.).
+* class PageData<T> : IEnumberable<T> P{ fields} can iterate over it with foreach.  Then implement interface and getenumetor
+* workflows pipeline important. confirm, promote, demote, cancelled
+* concurrency: optimistic or pessimistic.  pess is old school.  few ways:
+ in unitofwork, whne savechanges handle exception. or add binary rowversion field to check rows updated
+ also add userid of who is updated and check when saving. if differnet, say another user is editing
+* date to string var Time = gig.DateTime.ToString("d MMMM yyy");
+* cohesion - related things should be together.  put simliar code in classes. eg: Cancel();
+* factory: create well formed object. create object within that same class public staticNotif GigCreated()
+* query string eg: search is optional: Index(string query = null)
+* use resharper to extract code into function.  GetGigsUserAttendances(string userId) //tells a story
+* HttpNotFound() is valid for returning ActionResult. method in base contorller class. 404 error
+
+* see if int has value : if (!pageIndex.HasValue)
+* Attribute Routing = don't need to put into RouteConfig.  In case need to change action name .rec'd
+routes.MapMvcAttributeRoutes(); first in routeconfig.     [Route("movies/release/{year}/{month}")]
+* see if BirthDate has vfalue in view: @if (Model.BirthDate.HasValue).BirthDate.Value.ToShortDateString()
+* @Html.DropDownListFor(m => m.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name","",  new { @class = "form-control" })
+* TryUpdateModel(customerInDb); Copies fields from passedin cust object (request) to this object. like am.
+* !modelstate.isvalid means mvc can't copy request data to model properties.  eg: empty string to nonnull
+* manager - higher level functions. stores = database code. IdentityUser and IdentityRole come default
+* Add Roles: Add in temp code.  Then copy row and then insert into migration.  
+ if user admin create success: var roleStore = new RoleStore<IdentityRole>(new adbc);
+ var roleMgr = new RoleManager<IdentityRole>(roleStore); rolemgr.CreateAsync(new IdentityRole("CanMge")
+ Usermanager.AddToRoleAsync(user.id, "CanMge"); // add user to this new role
+ add-migration seedadminuser: copy users, aspnetroles, aspnetuserroles.  Sql("@" copy paste rows);
+ delete rows and then update database.
+* for roles - easier to create entire new view. if (!User.IsInRole("CanManageMovies"))
+* defeat magic strings:  public static class RoleName { public const string CanManageMovies = "xx"}}
+* build migration script from migration onwards. send to dba
+* ConfigurationManager.AppSttings["FacebookID"] <appSettings><add key="mailserver" value="1">
+* abstraction = show what is necessary.  encapsulation: hide complexity.  polyrmphoismm: different behav.
+* console apps: System.Diagnostics.Debug.WriteLine to write to output window. cl.read to stop window close

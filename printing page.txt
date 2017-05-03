@@ -1,0 +1,9 @@
+* two css styles, one for screen and one for print
+
+1) make controls/gridview from css
+2) create print css with white very basic formatting
+3) header link ="styles.css", media="screen"
+4) header link ="printstyles.css" media="print"
+5) suppress elements you don't want printed - in css: find "id" in html source, in css set that class to #class visibilty:hidden; height: 0px; width: 0px;
+
+

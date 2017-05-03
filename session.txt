@@ -1,0 +1,18 @@
+session state
+
+places to store:
+
+<configuration>
+   <system.web>
+      <sessionState mode="InProc"
+                    cookieless="true"
+                    timeout="20"/>
+      </sessionState>
+   </system.web>
+</configuration>
+
+mode = 
+Off	Indicates that session state is not enabled.
+   	InProc	Indicates that session state is stored locally.
+   	StateServer	Indicates that session state is stored on a remote server.
+   	SQLServer	Indicates that session state is stored on the SQL Server.

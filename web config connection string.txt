@@ -1,0 +1,5 @@
+<configuration>
+ 
+<connectionStrings>
+ <add name="Northwind" connectionSTring="data source=localhost;">
+</connectionStrings>

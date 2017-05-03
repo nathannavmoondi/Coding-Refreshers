@@ -1,0 +1,102 @@
+angular directives used in views
+directives can be written as tags, attributes and class names
+
+to prevent {{'s from showing use ng-bind instead  <span ng-bind="phone.name"></span> or add ng-cloak next to ng-app
+* when passing json, ang likes single qoutes in properties, not double quotes
+
+* factories (service) ismply return an object
+* to use html5mode : $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        });
+* angualr routing = for this madeup url, load this html into the ngview.
+* to make angular spa urls work alone, change route config to add a catchall:
+routes.MapRoute(name: "Registration SPA", url: "Registration/{*catchall*}",
+                defaults: new {controller="Registration", action="Index"});
+
+* easy data sending; use controller to send down json data as a string to be used as model.  then use
+@html.raw(model) to attach in service, ng-init, etc.
+
+* $q service to handle the response. can then use success, then etc function extensions. when resolved, caller can then use then
+
+* whne doing demos always use angular version they are using to code along
+
+* post in angular is simple: $http.post('/Student/Save', student);
+
+* $resources great for webapi.  easier than $http. has promises built in.  no need for $q
+
+* show error on save. set $scope.error to what's returned in request data if badrequest.
+
+* server side validation: set dataannotations on model, in save, get modelstate error msgs in select many, then create createresponse and send that back as parameter. 
+* then in view, use ng-repeat on $scope.errors with {{error}} to show all model state errors
+
+* client side validation: set form with novalidate. set required on each input.  give it name. then div with class text-danger. then ng-show="accountForm.firstName.$error.required && accountForm.firstName.$dirty">Please enter your first name</div>
+then set submit button : ng-disabled="accountForm.$invalid" 
+
+* use ng-pattern to set validation in fields
+* ng-submit is added on the form element
+* go to url:  $location.path('/newEmployeeForm');, service is $location in parameters.
+* $window.history.back(); go back in angular routing.  great for saving. use $window service
+* passing ID in angular routing :  .when("/updateEmployeeForm/:id") /updateEmployeeForm/123 use routeParams
+* check route params : if ($routeParams.id)
+            $scope.employee = efService.getEmployee($routeParams.id);
+
+* install ui bootstrap for angular via nuget
+* $uibModal instead of $modal in ui bootstrap
+* cancel modals : $modalInstance.dismiss() or close(); inject $modalInstance service
+* use ng-show with span.  set ng-show to employeeForm.fullName.$error.required &&  employeeForm.fullName.$dirty">Full name is required</span>. set input element to 'required'
+* use ng-required="true" if you wish to use an expressin
+* create css rules for ng-validation to style. eg: input.ng-pristine {
+    background-color: green;}
+* ng-class, set class on condition: ng-class="{'has-error' : employeeForm.fullName.$invalid &&  employeeForm.fullName.$dirty}
+* reset button. 1) make input type =reset. 2) add fn reset - $scope.$broadcast('hide-errors-event');
+3) send msg to all fields.  4) listen to event and removeclass 'has-error' on element.
+
+* $locationProvider.html5Mode(true); necessary when routing in mvc project.  inject $locationProvider serice.
+
+* set properteries in controller using $scope or this.  eg: var vm = this; vm.name = "steve"
+* array of objects : vm.trips = [{name: 'steve'}, {name: 'bob'}]; ng-repeat="trip in vm.trips" {{trip.name}
+* filters: {{ trip.created | date: 'shortDate'}}
+* ng-minlength="5", ng-disabled="newtripform.$invalid"
+* vm.dateHired = new Date() to set new date
+* vm.newTrips.Push({name: vm.newTrip.name, date: new Date()});
+* get data from server: $http.get('/api/trips').then(function(response)){ angular.copy(response.data,
+vm.trips).  get data and copy to vm.trips property
+* directives are good for re-use.  module('myapp').directive('waitCursor', fn)
+* then return { temmplateUrl: '"}
+* take in lambda for html helper:  public static MvcHtmlString TextBox5For<TModel, TValue>(
+      this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TValue>> expression, object htmlAttributes = null) { return string }
+* modules are like namespaces
+
+* dropdowns in ang a bit more complex: use ng-optoins and ng-model.  grab list data from db or array
+ <select id="searchCategoryId" class="form-control"
+                                ng-model="vm.searchInput.selectedCategory"
+                                ng-options="item.CategoryName for item in
+                                vm.searchCategories track by item.CategoryId"></select>
+where item.categoryname is name, item.categoryid is the value in vm.searchCategories which is lookup.  
+ng-model is vm.searchinput.selectedcategory which is object with name and value properties.
+ vm.searchInput = {
+            selectedCategory: {
+                CategoryId: 0,
+                CategoryName: ''
+            }
+* bound table data to other property: ng-repeat="product in vm.products | filter: vm.searchInput.productName". great for searches. searches across all properties.
+or : {ProductName:vm.searchInput.productName} for one field. can also use function
+* bug: if you hvae navigation properties, json does'nt work well with angular. (journey mvc to ang)
+* when posting - create same object as is created on api side.  including names. casing not important
+               
+* server side searching: pass along search object.  getlist, pass along new data to put vm.products
+* JSON dates are strings. comes as UTC format 2015-11-05T00:00:00. convert to human format. toLocaleDateS
+
+* ang validation: set form to name. make novalidate. check validity of form ($valid). add html5 atributes
+* set names.  add ang attributes: ng-minmaxlength.  display ng-show valid messages
+* controller: save old object, edit new object, if saved copy over new object cancel discard object
+* disable save button if myForm.$valid is false
+* $scope.$watch("Customer.CustomerAmount", function(){ }); code gets called when field changes
+* return errors and list of data?  create ClientData class with IsValid bool and object data;
+* ang: if (daqta.IsValid) $scope.Custoers = data.Data; else $scope.Errors=data.Data;
+* $routeProvider: app.config(['$routeProvider', function($routeProvider){
+$routeProvider.when('/Enter', { templateUrl: 'customerui/entercustomer', controller: 'custviewmo0del'
+.otherwise({ redirectto: '/}); eg: /localhost/Home#/Enter
+* modal dialogs 1) add modelinstance (uibootstrap) service.  2) call model.show 3) specify html 
+4) add model header, dialog, footer, etc. html tags. 5) add method to model.dimiss, cancel. etc code

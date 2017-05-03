@@ -1,0 +1,12 @@
+foreach (htmltablerow in table1.rows)
+{
+ foreach(htmltablecell cell in row.cells)
+ {
+  control ctrl = cell.controls[0];
+  if (contrtol is TextBox)
+  {
+    ViewState[control.id] = ctrl.text;   
+  }
+   
+ }
+}

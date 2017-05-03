@@ -1,0 +1,67 @@
+types:
+
+web services
+remoteing
+wcf
+
+windows communication foundation
+
+* works in a flexible way. you can easil ychange channel of method of communiaion, etc. by changing file on server.
+
+1) Create WCF Service Library (eg: Book Services)
+
+2) Creates an interface IService for you. (rename to IBook, etc.).
+
+3) Rename Service1 to your name (eg: IBook, ICustomer).
+
+4) Modify "operation contracts".  these are what's exposed.
+
+5) Run and runs WFCF Test Client.  Double click function, then click 'invoke'.  Check response.
+
+ADVANTAGES over asmx
+
+interopable web services
+binary .net .net communication
+distributed transactons
+support for ws specifications
+queued messaging
+restful communication
+
+ASMX limitations
+you can only host your web services in IIS
+·         you can only reach your web services over HTTP
+·         security is very limited
+
+WCF remedies this - and offer much more beyond that. You can host your WCF services in IIS - or self-host in a console app or Win NT Service, as need be. You can connect your WCF services using HTTP, TCP/IP, MSMQ, Peer-to-peer protocols, named pipes for on-machine communications and much more
+
+USING IN CLIENT SIDE APPLICATION
+
+1) Add Service Reference - click
+
+2) In Address (if same computer), click Discover.
+
+3) Expand service and til you get interface, operation contracts on RHS.
+
+4) Click advanced and click 'generate asynchronous'.  Give namespace decent name.
+
+5) Click OK
+
+6) In codeview: 
+
+private BookService.BookServiceclient _service = new BookService.BookServiceClient();
+
+list1.itemSource = _service.GetBooks();
+list1.displaymemberpath = "Title";
+
+7) TIP: Put this code in worker thread, not UI thread.
+
+var book = new BookService..BookData(Author="Mandy", Price=80M, Title="Unified");
+
+_service.AddBookCompleted += //generates handler
+
+_service.AddBookAsync(book);
+
+8) In completed handler.  so app doesn't wait.
+
+list1.itemSource = _service.GetBooks();
+list1.displaymemberpath = "Title";

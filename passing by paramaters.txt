@@ -1,0 +1,17 @@
+usually paramters just pass copy.  can't change value
+
+parameter keywords:
+
+ref and out keywords allow pass 'by reference'
+ref paramaters req. initialied variable
+
+public bool work (ref string text, out int age)
+{
+
+  return int32.tryparse(text, out age);
+
+}
+
+ref = you will use this variable
+
+out = ou don't have to use, so doesn't haver to initialized

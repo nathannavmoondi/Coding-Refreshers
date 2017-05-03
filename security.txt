@@ -1,0 +1,47 @@
+authentication & authorization (2 types)
+
+1) authentication
+
+forms
+windows (basic and integrated)
+Passport
+
+web.config
+
+<authentication mode="Windows" or "Forms"/>
+
+** Forms
+<Forms loginurl="login.aspx" timeout="30"/>
+ <credentials passwordformat="clear">
+   <user name="andy" "password="password">  /// specify password in web.config
+
+** check 
+
+If FormsAuthentication.Authenitcate(username, password)
+ FormsAuthentication.RedirectFromLoginPage(username, false);
+else
+ display message
+
+** membership class if you want to use the sql server membership data store
+ membership.validateuser(username, pw)
+
+** controls to create easy login page.
+ take over Authenticate event.
+
+** aspnetdb.mdf
+   contains users/pw,etc.  
+
+** IIS
+
+go to IIS
+in properties, atuehtnication methods, set username/pw, allow anonymous or integrated windows authentication.
+
+
+2) authorization
+
+<authorization>
+ <deny users="?"/> // anyone not logged in gets login.aspx
+ <allow users="ANDYO\Andy Olsen">
+ <deny users="*"/>
+
+

@@ -1,0 +1,564 @@
+.NET
+ resharper: ctrl-n to load files, alt enter to run intelligence, ctrl tab to see list of open files
+ int to string: int myInt = System.Convert.ToInt32(myString);  Also int.tryparse();
+ string to int: myInt.ToString();
+ [Bind(Exclude="Notes")] don't bind this from the post request's data
+ Client Side valid: @scripts.render("~/bundles/jqueryval") for jquery.valid.unobtrusive.js
+ ModelState.IsValid  When MVC populates object from binding, it sets ModelState if errors.
+ String.Join(" ", errors); where errors = List<string>.  Puts them together with space.
+ Error return in action: return new HttpStatusCodeResult(404, "An error occured");
+ Constructors:
+  1) own constructor: public class AccountController: this(new UserManager()) { } calls
+  it's *own* constructor with usermanager passed in
+  2) base constructor: public class AppDBContext() : base("DefaultConnection") { }
+  calls base classes constructor
+ styles and scripts bundle
+ owin = specifications(api) for frameworks and servers. katana is ms's implementation
+ .net core - not relied on system.web. can run on any os or self-hosting. so 
+  it is modular, lightwight and portable. lotsa owin middleware.
+ user.identity.getuserid()
+ concrete classes: identityuser, identityrole, identitydbcontext
+ profile data in applicationdbcontext
+ asp.identity = rolemanager, usermanager, userstore, rolestore, identitydbcontext
+ viewbag wrapper around viewdata.  both the same
+ @section scripts, then <script> tag then write javascript. will be at end of page.
+ ? nullable.  types are null until new'd or assigned value
+ if (user.IsInRole("rolename")
+ return HttpNotFound for ActionResult
+ viewmodel instead of domain.   MVM, MV VM
+ dto instead of domain.  
+ AutoMapper uses automapper mappingprofile.cs file to set it up.  then map<types>(object1, object2)
+ RouteConfig.cs sets is routes.maproute(name, url, etc.)
+ Startup.Auth.cs sets up cookies, owin context, oath social logins, etc.
+ IdentityConfig.cs sets up email, sms, applicatinusermanager,etc.
+ For Edit action, singleordefault linq call, then set viewmodel, then return view
+ SingleOrDefault returns single record. FirstOrDefault returns first based upon multiple records
+ For Save (post), !ModelState.IsValid then setup vm again (with passed object), return view
+ For Save.  all good.  Copy fields to recordindb, then savechanges or tryupdate();
+ Check Id = 0 for new records
+ set @Html.Hidden() to copy data you need but don't want to show
+ DropDownList.  Use @model.list, or pass list to a viewbag with SAME NAME as id in view. eg: catid
+  Example:   @Html.DropDownListFor(m => m.GenreId,
+            new SelectList(Model.Genres, "Id", "Name"), "Select Genre", new { @class   = "form-control" })     
+  @Html.DropDownList("bookGenre","") where bookGenre is in viewbag and .net auto populates and sends
+ myval.HasValue to see if a int has a value or null.
+ Func<Course, Bool> predicate.  Course = input for lambda.  Bool = return.
+ string.IsNullOrWhiteSpace(object) to see if string is empty
+ Data Annotations - [Required(ErrorMessage = "")], [StringLength(255)]
+ @Html.ValidateAntiForgeryToken, then [AntiForgeryToken] on action
+ ValidationAttribute to setup own validation
+ add JqueryVal on page to do client side validation
+ Generic Collctions: IList, IEnumerable, IDictionary(key value pair), ICollection (for domain classes)
+ two web.configs for debug/release. have transforms in them.  can set custom error page
+ Elmah = exception logging
+ Glimpse = diagonostics. action filters execute before/after each action method.
+ Global.asax = Application_Start(). routeconfig.registerrouters, registerbundles, etc.
+ Publish. Create profile.Send to ftp,file system, or 3rd party website: azure, etc.
+ zen coding: .class+h1>div>div.class enter
+ html helpers = defining yor own helpers to create html code
+ Set Cookie = Response.setcookie(cookie) where cookie = httpcookie. request.cookies[""]
+ Adding Roles - Add manually.  Copy paste sql into migration.
+ Async needs await in caller code.  Also async functio needs to retun Task. await   MyFuncAynsc().  Async frees a thread.
+  static async Task<int> SomeWorkAsync() { var result = await FuncAsync(); return    result; }  Need an Async API from library.
+ ?? = tertiary int page = int.Parse(Page ?? "1") pass Page but if Page is null, pass   1. ?? = if null.
+ Areas.  easier organization for bigger projects. put controllers ,models, views in one arae.
+ Dropdown. Easier  Create selectlist and assign to Viewdata. ViewBag.CategoryId = new SelectList (CategoryBs.GetALL().ToList(), "CategoryId", "CategoryName");
+ Immediate Window - type in user.identity.name to see name
+ Scaffolding - Create controlers with read/write of EF. Set model/dbcontext
+ Validation: [Required], [StringLength(60)], [Display(Name="Name")], [Range(1,10)]
+ Authenticated: ShowActions = User.Identity.IsAuthenticated
+ Everything derived from System.Object.  HashTable to access via key
+ AjaxForm and AjaxLink (simply calls and replaces div with return PartialView("_B", book));
+ Expression = expression lambda that's not executed.
+ 
+ 
+Views
+ @use @Model and @(..data type ) in views
+ and @{ and } for code blocks inviews.  comments <!-- --->
+ eg: <h2> @( ((Movie)ViewData["Movie"].Name) )</h2>
+ @using (Html.BeginForm("Save", "Movies")) { } //no urls, posted back to same action with get.
+ then add submit button: <button type="submit" class="btn btn-primary">
+        Save
+    </button>
+ @Html.ActionLink("New Movie", "New", null, new { @class = "btn btn-primary" })
+ @Html.Partial("_NavBar") (for ajax calls, return partials).
+ @using (Html.BeginForm("Save", "Customers", FormMethod.Post))
+ Date:  @( ((DateTime) Model.BirthDate).ToLongDateString() )
+ [url] and [uniqueurl] for url validation
+ @if (Request.IsAuthenticated) { ... } User.Identity.GetUserName()
+ DropDownList() - @{ var items = new List<SelectListItem>(); items.add( 
+  new selectlistitem{ text="Action"});} then @html.dropdownlist("", items)
+  can use Enum using TypeOf(myEnum).GetItems() but more complex with static class
+ @using Book.Entities above view
+ <select> tag uses <option> tag for dropdowns manually
+ name is used for request forms binding, id is for javascript.
+ SearchString: @Html.TextBox("SearchString") then (string SearchString) in form action
+ @foreach(var item in Model){ <li>@item.name</li>}
+ Ajax: ActionLinks or Form Helpers
+  @using Ajax.BeginForm(action, controller, options object(insert mode, target)
+  body of ajax form -input text/name, img(style="display:none" and submit button
+  @Ajax.ActionLink("LinkText", action name, new Ajaxoptions{ UpdateTargetId="#div");
+  Action shulod return text or html (partial view) as ActionResult
+  Add unobtrusive-ajax to bundleconfig. (jqueryval)
+  LoadingElementId = hourglass id (ajaxload.info)
+  ViewModel for the view eg: TrainingProductViewModel class  passed to [HttpPost]
+ [Authorize] attribute. Each menu item should have own controller. 2actions: get/post.
+ @Html.ValidationMessageFor(lambda) use data annottions for error msg
+ Validation Fails: if (!ms.isvalid) return View("create", vm); //pop any lists for dropdowns
+ DateTime: @gig.DateTime.ToString("MMM")
+ @if, @foreach, @using, @model myapp.ViewModel; @{ }, @using system.data.entity;
+ SearchBox: Create @using (Html.BeginForm("action", "ctrl"). tip: use bootstrap 'input-group', with icons
+ Pass args to action: return RedirectToAction("Index", "Home", new {query = "5"}); //as query string
+  in action: Index(string query = null);
+ Layouts: for areas.  change viewstart to use ~/Views/Shared/_Layout.cshtml instead of their own
+ TempVars : like sorting asc/desc.  Use viewbag. new { sortOrder=(ViewBag.SortOder==null?"Asc" : 
+  (ViewBag.SortOrder =="Asc"?"Desc":"Asc"), sortby="Title"}
+ Checkall: $("#selectall").click(fn(){ $('.ckb').each(fn(){this.checked=true;}//set eachcb
+   to true.  only if (this.checked) otherwise set to false.
+ approved checked ajax: checkedIds = $(".ckd").filter(":checked").map(fn() { return this.id;});
+  $.ajax(type post,url, traditional true, data: {Ids : checkedIds.toArray(), Status: "A"};
+  successFunc(data,status){ $("#Data").html(data); location.reload;} //returns partial view
+  [httppost] ActionREsult Approved(List<int> Ids, string Status);
+  Html.Partial(), Html.RenderPartial(),Html.RenderAction() all render partials
+  TempData to transfer data from page to page
+  Display ViewBag : @ViewBag.Username
+  Save ViewBag UserId : @html.HiddenFor(m=>m.UserId, new {id = "UserId", Value=ViewBag.UserId})
+  New Object like SelectListItem's : vb.categories = ct.categories.select( x=> new SelectListItem() {
+   text =x.name, value=x.id.tostring()}).ToList();
+  Return Json in Action controller.  return Json(messageslist, jsonrequestbehavor.allowget);
+  View Name.cshtml corresponds to the action name in that controllers views folder.
+
+WebApi2 
+ WebApiConfig.cs
+ settings = config.formattres.jsonformatter.serializersettings then set contractresolver
+ setup maproute in file above.
+ either: throw exception if somethig wrong. or return Ihttpactionresult.  Better: 
+ return OK or BadRequest instead
+ Uri = uniform resource locater.  Return an Uri with url of passed request with new Id added to url.
+ configurationmanager.connectionstrings["NorthwindConnection"].ConnectionSTring;
+ For Authentication, user needs to be logged in.  Otherwise login via tokens.
+ wcf endpoints. config utility.
+ can use actions in controllers. but must return json (contentresult) in camelcase
+ Return ID in object instead of return success. Caller can set ID in object upon create.
+ Setup CamelCase in global.asx app_start section.  jsonformatter.contractresolvers, etc.
+ Add WebApi to project: create api controller, follow readme, or add api package via nuget
+ url: api/{controller}/{id} verbs:get, post, delete, put
+ return IEnumerable for gets instead of List
+ Webapi auto converts collectoins to json.
+ Swagger for Azure.  Show api's : https://libraryapi.azurewebsites.net/swagger/ui/index#/BookTitles
+  
+Bootstrap
+ form-group, form-control.  @Html.TextBOx("txt", "", new {@class="form-control"})
+ navbar
+ checkbox
+ bootstrap UI widgets
+ responsive, 12 columns grid layout, sm, med, large
+ btn btn-primary
+ bootswatch themes 
+ <table id="movies" class="table table-bordered table-hover">
+ container, container-fluid for main page in layout.cshtml. container centers/margins
+ .dropdown-menu
+ horizontal styling = name [textbox], nextline, department [dropdown], vs name, br, textbox
+ fieldsets = group of controls. goes along with legend (headline).  looks nicer
+ panel.  <div class="panel panel-primary"><div class="panel panel-heading'>
+
+Jquery
+ .tag(names), id, class, attribute. all queryable.
+ .html : alert($("#form1").html()); or $("#mydiv").html("<br>hi</br>");
+ .css : $('.BlueDiv').css('border','2px solid red');
+ .multiple: #div1, #div2 = both div1 & div2.  "table tr" = ancestor descendant.
+ .attribute : $('div[title="div title"]'); [ = "where".
+ .selectors = ":" eg: var inputs = $(':input'); give me inputs.  return collection. :checked
+  $('tr:even/first').css('background-color','yellow');
+ .val = jquery function.  $() = jquery wrapper otherwise dom element with properties.
+ .contains : alert($('div.contains("my div")').html());
+ .each : $('div').each(function(index, elem) { alert(index + $(this).text()); });
+ .$(this) = object within each function. or alert(index + $(elemn).text()) thru elem parameter
+ .addclass or removeclass('Highlight');
+ .click : $('#submitButton').click(function() { alert('clicked button'); 
+ .on = $('#mydiv').on('click', function(e) { $(this).toggleClass('highlight'); };
+ .parent
+ .$(document).ready(function() { } ); //document is specific selector
+ .ajaxstart(function() { } ); .ajaxstop
+ .selectors #customers ul
+ .map(function() { use this operator eg: this.id}) iterate through all. $ = array.
+ .post, .get
+ $.ajax({ (also can use postman to test apis)
+                        url: "/api/movies/" + button.attr("data-movie-id"),
+                        method: "DELETE",
+                        success: function () {
+
+                            console.log("success");
+                            // button.parents("tr").remove(); delete from dom
+                            table.row(button.parents("tr")).remove().draw();
+
+                        }
+                    });
+ .load loads html: $("#mydiv").load('../data.html'); or calls .svc service file
+ .get calls url or loads file.  $.get('../data.html', function(data){ $('#div').html(data); });
+ .post $.post('data.aspx', {PageSize: 15}, function(data) { $('#d').html(data);});
+  or $.post(url, null, function(data){ var cust = data.d[0]; $('#d').html(cust.FirstName); });
+  jquery ui controls. copy/paste example code
+  $.post("/api/followings", { followeeId: button.attr("data-userid").done(fn).fail(alert());
+  e.preventDefault();
+  $("form").submit(); submit form
+  data- to add your own data. eg: data-pdsa-val="@item.ProductID". use .attr("[data-"]) to retrive
+   then put into a field eg: $("#EventArg").val($(this).attr("[data-") on click handler
+  function(e) : e = event click. .click(function(e){ $(e.target) is button});
+  datatables for jquery and bootbox
+  $.getJSON(url, function(data) { } }; //data.length
+  C# needs new for anonymous objects, javascript doesn't in function calls.
+  Build URL for get/post/ajax. var url = "@Url.Action("survey", "home");
+
+Javascript
+ Bootbox for dialogs
+ Moment for time functions
+ Toaster for cool popups
+ Modernizer for older browsers
+ if var not used in function, it becomes global variable.
+ var d = new Date(); var n = d.getFullYear();
+ if defined: if (typeof sum === 'undefined') sum = 0; //global sum variable.
+ document.getElementById("demo").innerHTML = "hi";
+ JSon is Key Value pair objects 
+ console.log("") and alert used often
+ @Scripts.Render("~/bundles/jqueryval") after @sectoin scripts line
+ confirm("") used often or alert()
+ .toarray (when sending to json) eg: checkids.toarray()
+ onclick = "return confirmDelete()" 
+ Unobtrusive javascript.  Add data-dashes, so code elsewhere can handle it not litter ur code with js.
+ <a href="javascript: document.getElementById('logoutform').Submit()"/>
+ Function declarations: two types = var myfunc = function(id) { } or function f(id) { .. }
+ closures - whole object is sealed off from global ns.  
+ revealing module pattern: Use return to set methods others can use
+ use Plunker to test javascript
+ .GetElementbyId, GetElementByTag
+ .attr, .parents("tr"). .remove
+ Events = onclick="doclick()"; or "Javascript: alert('oh oh');"
+ var project = new Object(); project.name="Hi", console.log(project.name);
+ prototypes = base class
+ functions: var emp = function(name){ this.name = name; }; var newemp = new emp("sam");
+ prototypes: better to add fn to proptyope.  not duplicated 10k times.
+ this = object within fn if new'd. outside = window object.
+ fn.call({}) : {} becomes this in the function.  
+ closure. fn and it's var's stay in context. eg: salary = 100k. console.log(fn()) returns 100k.
+ IIFE avoid polluting global namespace. (function(){ c.log('hi');})(); gets called right away
+ global variable: var app={}; (function(ns){ ns.name='Hi';})(app); cl.log(app.name); app.name;
+ js loosely typed.  don't need to define first. use 'use strict' to enforce
+ promises & observables: q popualr promise library. avoid tons fn callbacks. 
+  .then(success),.then(error).then(done).  promises = calls when done. 
+ react = observable streams pattern. take promises to next level.  
+ .map : create new array with fn on each element
+  var uniq = arr.map((name) => {return {count: 1, name: name}}); returns new object array using LAMBDA.
+ .foreach : like map but doesn't return anything
+ for: for(var i =0; i<5, i++) { };
+ .filter : returns array if passes where lambda condition
+ object.keys : returns the keys of an array. 
+ typeof factorialCalls === 'undefined'.  check to see if global var not defined
+ if shorthand : var n = foo ? 1 : 2;
+ js object: person = { name: "John Smith", invited: true}; array: p ={ [{n:true},{n:false}] }
+ Functions As Args: sq=fn(){return 1;}; op=function(f,a){return f();} op(sq, 3);
+ this = object you're currently working on.
+ === compares both VALUE and TYPE. == just compares values. = is assignment.
+ .push = add to array.  out=[].  for (i in obj) { out.push(i); }
+ {} = object.  [] = array.
+ prompt : get input.  var year = prompt("Please enter last 2digits of yor gad year")
+ DateTime : var time = new Date(); var year = time.getFullYear();
+ .toString: new Date().getFullYear.toString();
+ .substr: toString.substr(2,2);
+
+EF
+ data annotations
+ fluent api
+ automatic migrations
+ eager and lazy loading
+ .include (eager loading using system.data.entity), navigation properties.
+ dbcontext needs to be disposed
+ configuration.cs has info
+ db has list all migration history
+ seed to insert data or create migration and sql insert
+ add Model to DBSet<model> on appdbcontext to have EF manage it
+ EF has changetracker engine
+ 2 table relationships: 1 to M, M to M (association) and just regular table. 
+ LinqToEntities = use VS to create EF classes by selecting db and tables. use metadata to modify
+ .removerange(array of records) 
+ .find(id) then .remove(record)
+ orderby, orderbydescending. var customers = mydb.customers.tolist().orderby(c => c.name);
+ math.ceiling (round to highest) (customers.count() / 10.0)
+ .skip, .take
+ Cascade delete for association tables
+ Seed = use context to addorupdate or use any(u => u.sername="sallen")
+ db (edmx), model (use designer on blank db and create sql scripts), code (classes)
+ For Multiple Contexts - specify different migration direcotires (for their files)
+ enable, add-migration, update-database, check mdf file.
+ EF Async.  public async Task<ActionResult> Index() { return View(await db.Books
+  ToList(orFind)Async(); }  Also use scaffolding to make async methods.
+ DataBase.Log = sql => Debug.Write(sql); all sql statements sent to output window
+  like sql profiler
+ Schema = Owner eg: dbo
+ override OnModelCreating to set field names, schemadefault, etc. base.OnModelCreat()
+ using (var ct = new MyDBContext()) { return ct.customers.ToList(); } returns List<Customer>
+ .SingleOrDefault(g => g.id==id), .Find(), .SaveChanges(), .Remove(Customer), .Add, 
+ Entry/Entity = ct.Entry(Customer).State = EntityState.Modified
+ DBInitializer class derived DropCreateDatabaseAlways<BookDBContext> Always recreate db when changed
+  Add override Seed(DBContext) add new records. global.asx: Database.SetInitializer(initclass);
+ where : b = b.where(s => s.name.contains(searchString); (if !string.IsNullOrEmpty(s))
+ query syntax: var books = from b in db.books select b;
+ method syntax: var books = db.books.ToList();
+ .distinct() unique data for list
+ .FindAll : ret = ret.FindAll(p => p.ProductName.ToLower().StartsWith("A"); //list of obj's
+ At beginning: enable-migrations, add-migration InitialModel, update-database, check mdf
+ Not Null for field: [Required] data annotation
+ ApplicationDbContext _context is ur main db.  in ctor _context = new Adbc.
+ Single : context.users.single(u => u.id == user.identity.getuserid());
+ Navigation Properties. Use [required] ID as well as class.  can then just set ID no extra db calls.
+ Some don't like foreign keys in domain models but great for nav. properties/setting required. 
+ XSS: Never do sql based upon query strings/textbox input. use stored proced.
+  sql injection, crsf (@html.antiforgerytoken/validateantift). xss = malicious javascript run.
+ .Include(g => g.Artist) to load dependancies.  virtuial for lazy loading
+ Association class: class attendance{ public gig, public user; [key][column(order=1)] public int
+  GigId{get;set;} [key][column(order=2)]public string attendeeid{get;set;} then add DbSet attendeces
+ Cascade Delete: Override OnModelCreating in dbcontext. modelbuilder.entity<table>.hasrequired
+  (a => a.gig).withmany(g => g.attendances).willcascadeondelete(false); //for 1 relatinship
+ .Any : attendances.Any(a =>a.attendeeid=userid).tolist();
+ Notifications: Create Notification class with gig then assoc.class usernotification with user.
+  notificatintype = public enum NT { cancelled=1;}
+ .Select (return collection) vs return one object. .include(g=>g.attendances.select(a=>a.attendee));
+ Reverse relationship: Attendance has GigId/Gig.  Gig has ICollection of Attendance.  1 to M setup.
+  modelBuilder.Entity<Attendance>().HasRequired(a=>a.GIg).WithMany(g=>g.Attendances).WithCascade(false);
+ LookUp : .ToList().ToLookup(a => a.GigId); //like dictionary. specify the key.
+  viewmodel = ILookup<int, Attendance> Attendances;
+  view: class="btn @(Model.Attendances.Contains(gig.id) ? "btn-primary" : "btn-default")
+ Unit Of Work : Repositories contained within it.  Make one SaveChanges or Complete call.
+ Repository: pass in dbcontext in constructor. until use di. allows decoupling from ef. create interfaces
+ 3 rules: 1 table each domain, then 1:M, M:M.  User has many urls, etc. create relationships master/child
+ 1:1 - GigId FK in one class slogan. Gig has SloganID back.  1:M Band has ICollection<gigs> Gig: BandID
+ M:M Student class = list<student-courses>. Course has list<student-courses>. student-course has
+  student field and course field (associaation class). read "has many" when you see List.
+ ado.net entity data model (edm).  pick db.tables creates dbcontext and model classes. adds conn string
+ TransActionScope for DB Transactions (using new transaction scope) trans.complete. system.transaction.
+ Wildcard in sql like statements - %
+ SeedData : dbcontext.Contacts.AddOrUpdate(p => p.id (key), new Models.Contact{id=1,});
+ Use corporate db: connectionString="data source=akasql.uat.akaraisin.com;initial catalog=Library;user    id=Candidate;password=Did*2016;MultipleActiveResultSets=True;App=EntityFramework"       providerName="System.Data.SqlClient" />
+ BookDbInitializer: DropCreateDatabase<dbcontext>{ override Seed();}
+  appliation_start. database.setinitializer(new bookdbinitializer()); //every time reset db
+ Relatoinships: either define in EF code-first, ForeignKey method or create in db designer. 
+ SurrogateId : adding two foreign keys
+ EF fluent api set relationship then reverse : hasmany(a=>a.courses) th4en withrequired(c=>c.author)
+  then .hasforiengkey(c=>c.authorid) 1:M
+ M:M .hasmany(c=>c.tags).withmany(t=>t.courses)
+ .withrequiredprincipal(c=>c.course) 1:1, so create parent course first then cover record.
+ .hasforeignkey(c=>c.authorid); .map to set table eg: association tables.
+ Where string in linq: where(c=>c.Name.Contains("C#").OrderBy(c=>c.Name);
+ GroupBY: ct.courses.GroupBy(c=>c.level) then two foreach loops.1st foreach use group.key; group in groups
+ .All(c=>c.FullPrice>100) and .Any();
+ Count = .where(c=>c.level ==1).Count(); 
+ deffered execution: ef only runs query on tolist(), first, lanst, count, max or iteration.
+ N+1 Loading issue: too much lazy loading.  for each record foreach, run another query to load relation.
+  multiple levels: single: .include(c=>c.author.address); //single property
+                   multiple: .include(a=>a.Tags.Select(t=>t.Moderator)); //tags is a collection 
+ Explicit Loading: Seperate queries. mulitilipe round trips
+  bit more complex: ct.courses.where(c=>c.authorid=1).Load();
+ Eager Loading: uses Join in one round trip.  Remember changetracker portion of EF.
+ Select certain property: var autohrIds=ct.authors.select(a=>a.id); then can use:
+  ct.courses.where(c=>authorids.contains(c.AuthorId)); //like an IN sql statement
+ LinqPad is app to test linq queries.  load up your dbcontext.
+ Repository: Add, Remove, Get, GetAll, Find. min. duplicate linqs. decouples.
+
+CSS
+ .padding-right8 to use everywhere]
+ less - using code blocks that get compiled to css.  less writing.
+
+Testing
+ edge, integration
+ db set library
+ method, condition, result
+ arrange, act, assert
+ nunit and ms test 
+ moq testing.  setup object and pass to object.
+ test driven development
+
+Design
+ use cases.  
+ define domains. domain driven design.
+ set phases
+ repositories = database code. can use any orm
+ dry - don't repeat yourself
+ srp - single responsiblity for code
+ kiss
+ liskov - derived classes should be subsitutable for their base classes.
+ open closed. open extension, closed modification.
+ interface - only require interface it needs. not implment anything else
+ singleton objects = only one instance
+ dependancy injection - can insert another object in future (eg: notification). decoupling.
+ solid = single, open closed, liskov substituion, interface, depedancy inversion
+ Use LucidChart instead of Vizio. diagrams/flowcharts/wireframes. 
+ In ctor, use New to new up any objects to get heap memory.
+ Freedcamp.  For Project Management.
+ Gather requirements. Extrat CORE USE cases
+ Req doc: Uses: GigHug is, Artist should have page, Users should be.  Id domains, pages and verbs
+  Use Case1. Case2: signup, login, logout, edit profile, view gigs, delete gig. Core=Change state
+  Use Case1: Put most important uses first. put in backlog. Create stories (tasks) in backlog.
+  Iteration = sprint. stage. Define dependencieds on all uses. add gig before view gig.
+ Seperation of Concerns/Information Expert. Class should handle it's own stuff, not other fns.
+ If isvalid/error modelbinding, set property GetTime {get{return}} to function GetTime() { return;}
+ Objects shoudl have behavior methods.  Not just property bags.  Populate themselves in ctor. validstate
+ Add Navigation property in class.  Add object to it.  EF keeps track and use savechanges() later.
+ 
+C#
+ extension method = create extension to class by first parameter static void   
+  extensionfunc(this string MyStr) in public static class Helpers { }
+ for list, to see if something is in it -> var movies = _context.Movies.Where(m =>     newRental.MovieIds.Contains(m.Id))
+ foreach loop: foreach (var movie in movies)
+  Enum - public enum Genre { NonFiction, Romance, Action }
+ AddRange: var glist = new List<string>(); var gqry = 	db.genres.tolist(); 
+   glist.addrange(gqry.distinct()); viewbag.genres = new SelectList(glist); use in view for dropdown
+ Add to list. List<person> me = new List<person>(); .  me.Add(new person() { fields});
+ Date : Convert.ToDateTime("01/01/1980") returns DateTime object
+ get set : public int value { get; set; }
+ Memory for list: in constructor init list : products = new List<product>();
+ Key Value Pair : valerrors = new List<KeyValuePair<string,string>>();
+  val.add(new KeyValuePair<string,string>("Error", "Val");
+ Object new: var gig = new Gig{ Artist =1; };
+ DateTime.Parse(string.Format("{0} {1}', vm.date, vm.time);
+ If conditional: return (id !=0) ? "Update" : "Create";
+ Avoid magic strings. use static classes or static strings.
+ Func<a,b> : delegate a = input, b = return. func<gigscontroller, actionresult> up = (c=>c.update());
+ Expression<Func<a,b>>.  Does not call func but allows lambda expression.
+
+Angular
+ App MOdule (<head ng-app="myapp") Module is the TOP guy. put in own js file.
+ put ng-app="myapp" in html element
+ var mymodule = angular.module("mymodule", ['dependency injections']); add MODULES from js files
+ create files for controller.js/service.js, directive.js and template.html (view)
+ create starter project for new projects
+ dependancy injection for app: var myapp=angular.module('app',['ngCookies']
+  mymodule.controller("x", function(scope){ $scope.customer = "me" });
+ Controller (myapp.Controller("name", function($scope, [service]){ 
+  $scope.employee = "Bob" // service.employee; })
+ <body ng-controller="efController">
+ Services.js: angularFormsApp.factory('efService', //returns object. custom data service.
+    function() {
+        return {
+            employee: {
+                fullName: "Milton Waddams",etc. } } }); return emp object
+ Ng-model to setup binding. <input type=checkbox ng-model="model"> 
+ do not use ng-bind or {{ }} ofr 2 way binding.  both the same.ng-model better.
+ Routing for spas.  ng-view
+ Directives: <employee-form/> defined as returning object:
+  angularFormsApp.directive('employeeForm',
+    function() {
+        return {
+            restrict: 'E', // key value pairs
+            templateUrl: 'app/EmployeeForm/efTemplate.html' <- contains html
+        }
+    });
+ Services(ng).  What you put in controller("x", function($scope, $location, $routeProvider, etc.){});
+ ng-change.  when element changes, call ng-change's event ng-change="check()"
+ Location to load other pages, $anchorscroll, scroll to another div in view. or $location.path(url);
+ $location.hash('down'). used with $anchorscroll(); also find out url of page
+ ng-click. when clicked, run this code.  ng-click="x=x+1"
+ ng-init.  run once.  ng-init="x=0"
+ ng-style.  ng-style="mystyle".  <mystyle> .changeColor{ color: blue; } </mystyle>
+ ng-keyup/down.  run this code when event fires
+ ng-show.  only show when this directive is true. <span ng-show="form1.email.$error.email/required">text</span> great for error displays.
+ ng-options.  for dropdowns.  <select ng-model="mydiv" ng-options = "item for item in dept" </select>
+  eg: in controller:  $scope.departments = ["Engineering","Marketnig","Finance"];
+ ng-switch. like a case statement. <div ng-switch="mydiv"> <div ng-switch-when="div1">hi</div>
+ ng-include. set json object of $scope.pages=[{ name: "firstpage", url "myfile.html"},etc.]
+  then ng-include="currentpages.url" when another var set to first element of array. loads that page
+ ng-value. for radios and selects. sets the 'value' property of that element. similar to ng-model
+ $timeout service: $timeout(countUp, 1000); calls countUp() function every 1000 ms.
+ $http. calls $http.post(url, data).success(function(data){ });  or return $http.get(url).
+  eg: return $http.post("Employee/Create", newEmployee); with newEmployee a JSON object
+ $cookies. use ['ngCookies'] 
+  $cookies.customer = $scope.customer. return $cookies.customer
+ $cacheFactory.  STore something in cache. angular.module('app',[]).factory
+  ('myCache', function($cacheFactory) { return $cacheFactory('myCache', { capacity: 3 } )); //size
+  then app.controller('cachecontroller', function cachecontroller($scope, myCache)...
+ ngRoute in app declaration: ["ngRoute"]
+ ng-view.  put in div.  <div ng-view><button add employee></div> everything within div is replaced
+ routing config: myApp.config(function($routeProvider) { $routeProvider.when('/home', {
+  templateUrl: "app/Home.html", controller: "HomeController"}).when or .otherwise etc.
+  Then use ng-view to show page. do not have a ng-controller directive. #/route1 url to use.
+ routing url = /home is #/home
+ Add angular-route.js to head of page
+ AngularJS UI Bootstrap install via nuget
+ Add script/Links to js/css in HEAD section
+ $scope = holds the model within a controller
+ value="{{ employee.fullName }}" is one way binding  
+ ng-submit = on form tag. when clicked, calls this function. prevent default action. like ngclick
+   place on <form ng-submit="submitForm()" tag>. ng-click on submit button
+ Breakpoints on angular functions.  great for submits.
+ Watch Window to view Angular objects
+ $location = go to new route. eg:  $location.path('/newEmployeeForm'); matches url in config.
+ Copy (deep) of objec. eg: cancel/save. $scope.editableEmployee = angular.copy($scope.employee).
+ $ = angular object
+ $window.history.back(). go backin routing.  eg for submit or cancel buttons. inject $window serv.
+ VERY easy to make typos. error handling is cumbersome. Use templates/snippets.
+ $routeParams checks urls eg: #/home/5. where 5 = id = set in route config.
+ UI Bootstrap - Bootstrap components written in angular
+  set ['ui.bootstrap'] as dependancy module in angular.module('xx'). eg: $model.open({});
+  read website for proper usage eg: $uibModel instead of $modal
+ UI Bootstrap ctrls = datepicker, timepicker, typeahead, rating, popover, accordian, collapse
+  usage: <div><datepicker ng-model="emp.hire" min-date="minDate" show-weeks="true"></datepicker>
+ $http service.  $http.get('url'. {params: {}}).then(function(res)( angular.forEach(etc.))
+ Typeahead. Add th directie to input element.  = "language for language in programmig | filter:$view
+ Alert. <alert ng-repeat="alert in alerts" type="{{alert.type}} close="closeAlert()"
+ VALIDATION: ngRequired, $invalid, $dirty, ngTouched, custom directive for field validation
+  give form name.  then set novalidate, so browser validation is off.
+  set required (html5) or ng-requird on input element (ng-required can be set to false or fn)
+  ng-pristine. field has not been touched yet.
+  Set CSS for errors: input.ng-pristine{ background-color: green; border: 3px solid black; }
+  ng-class. set expression on class is added. <div ng-class="{'has-error': empForm.name.$invalid}
+  ng-dirty.  not show error upon startup. ng-class="{'has error': form.name.$invalid && $dirty.
+  ng-touched (ag 1.3+).  means dirty and used tabbed out. (blur event).
+  Create cusotm validation directive: angularFormsApp.directive('showErrors', function() {    
+    return { restrict: 'A',require: '^form,  link: function(scope, el, attrs, formCtrl) { go online.}
+  ng-maxlength, ng-minlength="3", ng-pattern 
+  ng-if="emp.name.$error.required">name is required</span>
+  $scope.broadcast('show-errors-event') another code else responds to that event
+  $locationProvider.html5Mode(true); in config fn, fixes mvc urls' with routing for ng-view to work
+  MinSafe issues: $scope becomes a.  angular needs names intact. fancy just don't minify.
+  PROMISES: Function returns promise to return data later.  use .then() to act when data returns
+  Show errors from mvc. div class="alert" ng-if="hasFormError(bool)"> {{ formErrors }}</div>
+
+Reporting
+ Use LocalReport of microsoft.reporting.webforms
+ Ponit to .rdlc
+ Create ReportDataSource (set source), set query, add, set rendered bytes
+ return File. excel or word or pdf.  create report in reportdesigner.
+
+html5
+ now has built in support for dates and times
+ media player
+ tag has directives/attributes.  whole thing is an element
+ input types: email, url, number
+
+Agile
+ Create product backlog by product owner
+ Scrum methodalogy of agile
+ Sprint planning create sprint backlog from product backlog
+ Meet daily scrum to overview sprint with scrum master (coach)
+ End of spring - work potentially shippable
+ Conduct sprint review, sprint demo and retrospective
+ Create new sprint from backlog. Scrum a form of agile.
+ Scrum team controls their own destiny.  project manager not required.
+
+Testing
+ TestClass, [TestInitialize], [TestMethod].  Nunit uses it's own attributes.
+ Moq = in place objects.  ONly implement behaviors we care about.
+
+Sql
+CREATE TABLE STATION  (ID INTEGER PRIMARY KEY,  CITY CHAR(20),  STATE CHAR(2), 
+LAT_N REAL, LONG_W REAL);
+INSERT INTO STATION VALUES (13, 'Phoenix', 'AZ', 33, 112); 
+SELECT * FROM STATION  WHERE LAT_N > 39.7;
+SELECT MONTH, ID, RAIN_I, TEMP_F FROM STATS ORDER BY MONTH, RAIN_I DESC;
+SELECT COUNT(1) FROM student; 
+UPDATE STATS SET RAIN_I = 4.50 WHERE ID = 44;
+COMMIT WORK;
+DELETE FROM STATS  WHERE MONTH = 7 OR ID IN (SELECT ID FROM STATION WHERE LONG_W < 90);
+MAX(age) LIKE ‘d%n’; EXPLAIN QUERY PLAN SELECT * FROM student;BETWEEN value1 AND value2;
+distinct (unique), COUNT(*)
+-------
+

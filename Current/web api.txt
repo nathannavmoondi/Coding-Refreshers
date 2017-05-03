@@ -1,0 +1,10 @@
+.net 4.0 supports web api, .net 4.5 supports web api 2
+json.net used for json serialization
+httpresponsemessage, ihttpactionresult and custom t ypes all valid response types
+200 is success status code
+jsonmediatypeformatter is formatter class for JSON
+web api filters used for extra logic before/after action method
+extracts values of primitie type from query string by default
+extracts values of complex types from http request body
+httpclient used to send http requests
+web api can be self hosted, iis, any server that supports .net

@@ -1,0 +1,3 @@
+string s = configurationmanager.AppSettings["connectionstring"]
+
+using system.configuration;

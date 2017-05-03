@@ -1,0 +1,56 @@
+asp .net
+mvc
+domain driven design
+jquery
+angular
+javascript
+bootstrap
+ef
+3-tier
+repositories
+typeahead
+less
+web api2
+use/edge cases
+test driven development
+agile scrum
+tfs
+azure
+typescript
+nuget
+code first
+linq method/query
+jquery ui
+resharper
+migrations
+owin
+oauth
+validation
+spa
+unobtrusive javascript
+html5
+chrome dev tools
+razor
+html helpers
+data annotations
+ajax
+identity
+dependancy injection
+design patterns
+web essentials
+zen coding
+c#
+generics
+moq
+view models
+json
+iife's
+bootswatch
+moment.js
+box model
+glimpse
+elmah logging
+anti forgery
+xss attacks
+sql injection
+

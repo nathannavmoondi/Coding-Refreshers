@@ -1,0 +1,72 @@
+webparts
+
+can be used with sharepoitn
+
+great for PORTALS  (need authentication first)
+
+each "section" ofa  web portal is a web part.  other stuff is "chrome" around it.
+
+all kinds of cool features (close web part, resize, remember, toolbar options, etc.)
+
+began as a 'web control' in sharepoint.  extending sharepoint.
+
+entire section of toolbox filled with webpart controls.  used to create your own portal.
+
+view modes: browse, edit, design, etc. (links in toolbar)
+
+set authentication mode to windows.  so everyone is authenticated right from the bat.
+
+
+1) add webpartmanager control to page
+2) add web part'zones' which are containers to hold webparts.  (like a div).  ie: left zone, right zone, editor zone, catalog zone.
+3) add controls. drop into web zone.  simple web part.
+
+custom web part
+-------------
+
+create class
+
+derive from WebPart (public class HelloWorld : Web Part { }
+
+override RenderContents function.   add writer.write("");
+
+in constructor - this.title = "hello world", this.titleiconimageurl="";
+
+add register directive to top of page. (or drag/drop)
+
+go to zone and add instance of that control <ns:mywebpart runat="server" id="mywebpart"/>
+
+programmatically
+------------
+
+webpart wp1 = new Wingtipwebparts.HelloWorld();
+webpartmanager1.addwebpart(wp1, webpartzone, 0);
+
+display modes
+-----------
+
+browse = no personlization
+design - drag and drop, personalization
+edit = also add delete web parts
+connect = connect webv parts together
+catalog = add web parts
+
+user controls
+------------
+
+craete user control
+throw them into a zone
+
+catalogs
+========
+collection of web parts
+user can add web parts to catalog parts/zone.  web parts they closed before and can no longer get.
+
+1) add catalog zone to page
+2) add catalog page part to catalog zone (view web parts that were closed)
+3) pouplat catalog part with web parts
+4) add declrative catalogue part to add web parts that weren't defined anywhere else on page.  make available to user as additianl web pars they can use.  Drag controls to this.
+
+view in catalog view mode
+
+

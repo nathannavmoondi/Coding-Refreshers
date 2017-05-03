@@ -1,0 +1,28 @@
+simple array
+
+int[] x = int[5];
+
+collections
+
+arraylist:
+
+List<string> listName = new List<string>();
+
+listname.Add(etc.);
+
+Dictionaries:
+
+ regionCountryData = new Dictionary<string, ListItem[]>();
+
+
+
+        regionCountryData["Americas"] = new ListItem[] { 
+            new ListItem("USA"), 
+            new ListItem("Canada"), 
+            new ListItem("Brazil") 
+        };
+
+ foreach (string region in regionCountryData.Keys)
+            {
+                RegionList.Items.Add(region);
+            }

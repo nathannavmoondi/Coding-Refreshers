@@ -1,0 +1,71 @@
+* specify servername.  add base("name=connection string") in constructor of dbcontext
+* Use seed to add default data. use migrations if you wish to do with sql scripts for dba
+* automatic migreations meamns you simply need to run update-database not creat migrations
+* can create list or a new projection using select new { object };
+
+* search strings - where r.name.Contains(searchTerm)
+* db.entry(record).  put that in changetracker.  set state to modified. when savechanges, save to db
+
+* select and selectmany.  sm flattens lists.  say people with list of phone numbers.  instead of returning list of list of phone numbers (var pl = people.select(p=>p.phonenumber), it flattens it to list of just phone numbers.
+
+* dropcreatedb. create class. add seed.  then add to global.asx Database.SetInitializer(new BookDbInitializer());
+
+* Populate dropdown with list of unique table values: var genrelist = new list<string>();
+var genrequery= from g in db.books orderby g.genre, select g.genre;
+genrelist.AddRange(genrequery.disctinct()); //add unique horror, fiction, etc. to list
+viewbag.bookgenre = new selectlist(genrelist) //make select list for dropdown
+genre: @Html.DropDownList("bookGenre", "All");//same name as viewbag
+
+* entity framework power tools. allows many right click functionality. vs extension
+* Clan can have many ninja.  Clan has LIST of Ninja
+* if model shows 0 or 1 To Many.  Make foreign key required or create a Id int property
+* Always have FK ID not just navigation.  EG: Clan and ClanId
+* ClanId refers required because it is int and ints are not nullable.
+
+* db first two options: edmx, tie to db.  or code first: just builds classes for you.
+* logging for console apps: context.Database.Log = Console.WriteLine;.  see everything in con window
+* add more than one record: context.Ninjas.AddRange(new List<Ninja>{ ninja1, ninja2};
+* can use where and then firstordefault or firstordefault with predicate inside (only if last cuz it executes right away)
+* for LISTS in domains, always instantiate in constructor. (why doesn't EF do this hwen scaffodling?)
+
+* lazy loading (virtual) may involve many round trips to db to load related navig. properties
+* explicit loading = using Load() to load navigation properties for objects all in one shot.
+* projection = return anonymous object. select(n=>new { n.name, }.tolist();
+
+* ignore field not found in database: modelBuilder.Types().Configure(c => c.Ignore("IsDirty")); in
+on modelcreating
+* run sql:  context.Database.ExecuteSqlCommand(
+* AsNoTracking().Include etc = when throw away context right after, save EF effort from tracking objects. performance (using (var context = new NinjaContext()) { }
+* FK's made life easier.  When adding Ninja Equipment.  Easier to grab equipment from db then add to ninja (or just set equipmentID sent it via post).
+* two contexts: creating migrations.  do enable-migrations for both contexts after renamng configuation.cs
+to that contextdbconfiguation.cs then run enable-migration context. same with update-database
+* two relationships: 1 to M: M to M 
+* M:M student has list studentcourses court has list studentcourse. studentcourse as nav proeprties: student and course. make all virutal. new them in constructor
+
+* transactionscope: using(TransactionScope ts = new Transaction?Scope()) { trans.Complete(); }
+* automatic mgirations if you don't wnat to keep doing add-migration in config  just update-database call
+* to view validation errors override SaveChanges as in automatedtellermachine dbcontext class
+* add to table db.customers.add(new Customer{name='blah'}); or use repository passing in dbcontext.
+
+* poco = create edmx at beginning (existing). take over with classes.  code first = do everythig manual. 
+* last updated field = timestamp. binary unique value.  changes each time row updated. set
+concurrency mdoe to that field to fixed
+* handle concurrnecy - use try catch.
+
+* association classes (user, notification): [key][column(Order=1)] public string UserId then NotId etc.
+then put navigation pro0perties: AppUser User, Notifcation Notificatsoin
+* to add: build notification object, get userobject, create new usernotifcation object, add savechgns
+* anaemic domain: property bag.  no behavior.  makescontrollers and services fat.  behavior rich domain
+* eg: appusr has Notify(notificatoin) method.  then attendee.Notfiy(notification). builds usernot object
+where user = this. Instead of create dbcontext, use navigation properties.  ef will handle it.
+* use constructors to avoid objects going into invalid states
+* for collections cna't use property in linq.  must use .Select(a=>a.Attendee) load that attendee prop
+* foreach(var attendee in gig.attendes.select(a=>a.attnedee) iterate over attendee 
+* call function on object with linq: notifcations.ForEach(r => r.Read());
+* Use SingleOrDefault() if 0 or 1 items are expected Use Single() if 1, not 0 or 2 item is expected
+* unitofwork has one method Complete(). Calls savechangs on dbcontext.  
+* insert repo's into unitofwork. then reference repo's under uofw.
+
+* having issues with updating with code first.  delete db.
+* migration or seed? if data consistent for all db's, and using code-first. use migrations.  use migrations
+when using code first not seed.

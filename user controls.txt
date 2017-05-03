@@ -1,0 +1,31 @@
+* add properties to user control
+
+public string Header
+{
+set {Header = value;}
+
+}
+
+* create event container page can call:
+
+public event EventHandler delete Accepted;
+
+(now clal event somewhere in control)
+
+button1_click
+{
+if Accepted != null
+ Accepted(this, EventArgs e);
+}
+
+* on container page
+
+-------
+
+in web.config
+
+<pages>
+ <controls>
+  <add tagprefix="customcontrols" tagname="header" src="/controls/mycontrol.ascx">
+
+now available on all pages.

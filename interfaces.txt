@@ -1,0 +1,7 @@
+class Interface IMyInterface
+{
+
+int MyFunction(string s);
+}
+
+interface is a 'contract'.  a class with no implemention just definition.

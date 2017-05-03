@@ -1,0 +1,7 @@
+create xmldatasource
+
+specify datasource
+
+specify xlst to convert structure of file
+
+xpath uses to filter data

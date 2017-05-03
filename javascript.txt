@@ -1,0 +1,214 @@
+-----
+
+document.write("Hello world");
+
+-----
+
+window.onload = OnINit;
+
+function OnInit() {
+
+}
+
+-------
+
+comments // or /* */
+
+<!--- comment out
+
+------
+
+<script type="text/javascript">
+</script>
+
+-------
+
+alert("welcome to my page");
+
+-----
+
+DOM, learn and all properties you can change
+
+--------
+
+if confirm("Delete", true); // confirmation prompt
+
+----------
+
+var ans = prompt("Are you sure?", "")
+if (ans) { alert("you said" + ans); } else { }
+
+var i = 0;
+
+---------
+
+window.locaton = "newpage.html";
+return false;
+
+-------------
+
+document.getElementById("controlname").onclick = clickHandler;
+
+or
+
+innerHTML <-- very popular
+----------
+
+*this*
+
+function ClickHandler()
+{
+ if (this.tostring().indexof("ccw") < 0) { alert("link not to this website"); }
+}
+
+----------
+
+error handling - try/catch.
+
+try { } catch(errMsg) { alert(errMsg.message): }
+
+------
+
+passing variables:
+
+setSquare(i);
+
+function setSquare(thisSquare)
+{
+ var currSquare = "square" + thisSquare;
+}
+
+-------
+
+arrays
+
+var  colPlace = Array(0,1,2,3,4);
+
+--------
+
+simple rollovers:
+
+<a href="blash.html" onmouseout="document.arrow.src='images/arrow_off.gif'" onmouseover="document.arrow.src='images/arrow_on.gif'"
+
+-------
+
+better rollovers:
+
+function setupRollover(thisImage) {
+thisImage.outImage  = new Image();
+thisimage.outimage = thisimage.src;
+thisimage.onmouseout = rollOut; // function
+
+thisimage.overimage = new image();
+thisimage.overimage.src = "images/" + thisimage.id + "_on.gif";
+thisimage.onmouseover = rollover; // function
+}
+
+funciton RollOut() {
+ this.src = this.outimage.src; 
+}  //rollover is similar
+
+play with this and have "_on, _off, etc." images auatomaticlay loaded for all images.
+
+-----
+
+*src
+
+var MyPix = new Array("images.gif", "a.gif", "b.gif");
+
+document.GetElementById("myPicvture").src = myPix[thisPic];  // set object to a string
+
+--------
+
+*random
+
+Math.floor(math.random() * 5);
+
+-----
+
+*validation
+
+document.forms[i].onsubmit = function() { return validForm(); } // validform do your validation
+
+-----
+
+value
+
+if this.value == ""
+
+-------
+
+focus
+
+this.focus();
+
+------
+
+GetElementsByTagName("*")
+
+var allTags = document.GetElementsByTagName("*"); // gives you array of all tags in document
+
+----------
+
+Cookies:
+
+var username = "";
+if (document.cookie != "") // there is a cookie
+ username = document.cookie.split("=")[1]; // second array of returned array, (username, John);
+
+document.getelementbyid("namefield").value = username;
+document.getelementbyid("namefield").onblur = setcookie; // fired when change
+
+funciton setcookie()
+{
+  docuent.cookie = "username=" + newname;
+ //expiry date, etc.
+}
+
+# of cookies = cookie.length
+
+---------
+
+deletign cookies:
+
+set expiry date to yesterday
+
+---------
+
+DOM
+
+view dom inspector.
+
+Nodes:
+
+bascailly elements on page.
+
+document.CreateTextNode(mytext);
+document.CreatElement("p"");
+
+--------
+
+Date:
+
+var now = new Date();  // now.getmonth() + 1.  use array of months
+
+-------
+
+Time:
+
+var now = new Date();  
+now.GetHours();
+
+-------
+
+
+
+
+
+
+
+
+
+
+
+

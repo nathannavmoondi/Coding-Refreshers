@@ -1,0 +1,24 @@
+string spath= @"c\testing";
+
+DirectoryInfo dir = new DirectoryInfo(sPath);
+
+FileInfo[] fi = dir.GetFiles("*.jpg");
+
+foreach(FileInfo f in fi)
+{
+ console.writeline("Name is {0}", f.Name);
+etc.
+}
+
+-------
+
+using (StreamReader = new StreamReader("temp.txt"))
+{
+ string sline;
+
+  Console.Writeline("the file is opena nd being read");
+
+ while ( null != (sline = sreader.readline() ) )
+  console.writeline(sline);
+
+}

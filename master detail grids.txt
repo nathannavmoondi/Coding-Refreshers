@@ -1,0 +1,6 @@
+two sqldatasources
+two data grid views
+
+set sqldatasource where clause to id = gridview1.selecteddatakey.value; (in source view).
+
+add 'select' button in datagrid1.

@@ -1,0 +1,13 @@
+linq to entities, linq to xml, linq to sql
+var teenAgerStudent = from s in studentList where s.Age > 12 && s.Age < 20  select s;
+class must implement ienumberable or iqueryable for linq
+linq are extension methods in system.linq.enumerable and system.linq.queryable
+lambda is shorter way of writing anonymous
+Except is difference between two collections
+Union is unique elements between two collections
+Intersection returns common elements ..
+Expression compiles into expression tree
+Expressoin Tree is a in memory rep of lambda expressoin
+To use, 3rd party data providers must implement IQueryable interface
+
+

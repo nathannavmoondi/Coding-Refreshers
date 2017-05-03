@@ -1,0 +1,9 @@
+<%@ Page Trace="True" 
+
+trace.warn trace.write
+
+trace.axd
+
+//across application
+
+<trace enabled="true" localonly="true" />

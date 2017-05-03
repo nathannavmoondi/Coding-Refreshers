@@ -1,0 +1,20 @@
+
+List<string> stateNames;
+
+stateNames = new List<string>();
+
+stateNames.Add("Alabama");
+
+ListBox.DataSource = statenames;
+
+//displaymember, valuemember
+
+this.DataBind();
+
+------
+
+declarative databinding
+
+1) create a static class, create GetItems function
+
+2) assign that class and function to web control to automatically populate

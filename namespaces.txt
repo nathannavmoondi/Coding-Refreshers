@@ -1,0 +1,26 @@
+namespace MyLibrary
+{
+
+ public class Car
+ {
+  void Drive()
+  {
+
+   }
+ }
+
+}
+
+--
+using Assembly; // if have using don't need to reference full qualified name below
+
+static void Main(string[] args)
+{
+ MyLibrary.Test Testing = new MyLibrary.Test();
+
+ Console.Wirteline(testing.Drive);
+}
+
+
+
+

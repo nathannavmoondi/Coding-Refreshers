@@ -1,0 +1,8 @@
+viewstate allows page to retain changes to control over postbacks.
+
+serializble
+
+[Serializable]
+class TravelPlan
+
+Allows you to transmit as bytes to viewstate, etc.  ViewState["TravelPlan"] = travelplan;

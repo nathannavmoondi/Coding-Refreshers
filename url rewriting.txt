@@ -1,0 +1,10 @@
+use vanity urls
+
+web.config
+
+configuration
+ system.web
+ <urlmappings enblabed="true"<
+ <add url ="~/myhome.aspx"
+   mappedurl="~/default.aspx?catid=1"/>
+  

@@ -1,0 +1,31 @@
+webapi2
+
+///Post: Create attendance record for concert.  Receive DTO from form.
+[HttpPost]
+        public IHttpActionResult Attend(AttendanceDto dto) 
+            //nathan: by default .net does not look for int's in request body. it expects int in url.  
+            //if you want concertId use -- [Route("api/going/{concertId}")]
+
+            //if you expect just int, then need to use "" as shown in index.html
+            // so just pass "" : (id) in json when using [FromBody] int ConcertId and not in url
+            // However: It is easier to just pass along an object dto.
+        {
+            var userId = User.Identity.GetUserId();  // use postman so authentication is recognized
+
+            var exists = _unitOfWork.Attendances.GetAttendance(dto.ConcertId, userId);
+
+            if (exists != null) 
+                return BadRequest("Entry already exists");  
+
+            var attendance = new Attendance()
+            {
+                ConcertId = dto.ConcertId, // use DTO instead of domain for security
+                AttendeeId = userId
+            };
+
+            _unitOfWork.Attendances.Add(attendance); // call repository
+
+            _unitOfWork.Complete(); //save to database
+
+            return Ok();
+        }

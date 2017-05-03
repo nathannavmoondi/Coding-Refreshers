@@ -1,0 +1,70 @@
+* sql command
+ executescalar
+ executenonquery
+ executereader (reader = cmd.executereader(commandbeheaviour.closeconnection))
+
+sqlcommand cmd = new sqlcommand ("select *", conn);
+cmd.commandtype = commandtype.text;
+int result = cmd.executescalar();
+
+* sqldatadapter
+ fills a data set
+
+* sqlparameter
+ holds paramter for query.
+
+* parameters
+  cmd.parameters.add("@ProductID", sqldbtype.int).value = 5;
+  rowsaffected = cmd.executenonquery();
+
+* sqldatareader
+  while (reader.read())
+  {
+     string s = reader.getstring(column);
+  }
+
+* Details View
+ ony control allowing you to INSERT.
+ DetailsView.ChangeMode(DetailsViewMode.Insert); // make form into insert in Page_Load
+
+* SqlDataReader
+ if you bound to a datagrid, doensn't allow paging or sorting.  So use dataset.
+
+* objectdatasource.
+ if you want to bind to data access functions in a class object.  if not, do it programmaticaly in code.
+
+* datarow
+  foreach (Datarow row in ds.tables["customers"].rows)
+  { string str = row["name"].string();
+    productslist.items.add(str); }
+
+  DataRow[] = ds.Tables.["Customers"].Select("CustomerID > 30");
+
+* dataviews.  more control of view, tempaltes, etc. create multiple different views, sorting, filtering, etc.
+ DataView view1 = new DAtaView(ds.Tables["Products"]);
+ view1.sort = "UnitPrice";
+ view1.RowFilter = "UnitPrice < 20";
+ // bind dataview to gridview
+ ProductsGridView.DataSource = view1;
+
+* GridView Events
+  SelectedIndexChanged
+  int id = (int)pgridview.selecteddatakey.values[0];
+ 
+* master grid & order details
+  1) index changed
+  2) get datakeyvlaue (productid) =
+  3) get ds based upon that productid value (database class function)
+  4) create dataview based upon that ds and a filter.
+  4) bind dataview to detailsview gridview.
+
+* eval
+
+  used in datagrid/datlist.  ex: text= '<%# Eval("pub_name", "{0:C}) %>';
+
+* templates
+
+  available in detailsview and formview
+
+* FormView vs DetailsView
+  FormView allows mroe customization then detailsview.  DetailSiew easier to work with for master/detail scenarios.

@@ -1,0 +1,162 @@
+null, object, undefined all js objects
+.slice(2) removes first 2 out of array
+jquery animate only for css properties containing numeric values
+typeoff null displays object
+pattern test: var test ="1,2,3", var pattern=^d+/g; pattern.test(text);
+jquery html method only works for html, not xml
+cookies: document.cookie = "key1=value"
+
+js: return char at specified index: charAt();
+.pop = removes last element of array
+.shift = removes 1st item of array
+var fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+.slice = fruits.slice(1,3); start end index (if string). orange, lemon. one parameter = start. to end.
+js: date.parse("01/01/80") returns # of milliseconds since 1970.
+jq: hide() method tohide selected elements
+jq: .css sets one more css properties
+
+break breaks loop and continues executing the loop
+jquery.ajax() to call ajax .ajaxSetup to setup ajax global
+js: looping structures = for, while, do while
+$("div").height(100);
+
+js: fn constructors:  var func = new Function("x", "y", "return x + y");
+js: unpassed params get undefined value
+jq: :disabled = all disabled input elements
+js is an oop language
+
+comparing ref types :  var array1 = ["value"]; var array2 = ["value"]; array1 == array2 is FALSE.
+.each is like a FOR loop  not foreach. returns index. .each(function(index))
+x = 100/ "Mango" = NaN
+instanceof = determine objectg is an instance of another object
+
+var[] arr = new Number(){5}; is wrong
+var arr = [1,"two",3,4]; is valid
+var myFunct = function(){}; // is anonymous fucntion
+
+1=="1" returns true
+variable declared without var keyword inside a function becomes global variable.
+do {}while(condition) runs at least once. even if false at end.
+
+add Jquery UI Datepicker: add class "needsdatepicker". in ready.  add datepicker to all with that class
+ $(".needsDatePicker").datePicker();
+
+array strring: var cars = ["a","b","c"];
+or var cars = new Array("Honda", "Toyota", "Ford");
+
+
+$form.serialize() - takes fields and puts into key value pairs object for ajax calls. json
+
+* setup ajax optoins object than call $.ajax(options).done(function(data) {     });
+
+* select attributes.   $("[data-pdsa-action]").on("click")
+use .data("pdsa-action") to get the value
+
+* var b = true; console.log(typeof b) = boolean.  an array = object.
+* hoisting = two pass compilations.  access variables before they are declared.
+* undefined vs null.  js sets vars to undefined.  users's set value to null.  if null, user did it.
+* js treats undefined and null as the same.
+* var = keep in fn scope.  eg: fn update() { var i =1; } //i=fn scope.  if i=1, i would be global scope
+* objects: var blog { name: 'ski utah'}; var upBlog = blog; blog.name ="hi";
+
+* anonymous fn var hire = function(name) { } vs fn hire = function hireEmployee(name) {} when there's error, hireEmployee is listed in console
+
+* obj vs func var m { key: value} vs var m = function() { }
+* call allows you to replace the "this" ina function.  .call({});
+* closures allows you to persist a function. keeps it's state/vars intact.  var fn=salary(5000); fn();
+* iife - executes immediately . protests global namespace.(function(){}());
+* recursion is fn ability to call itself
+* bom/dom : window.innerWidth/outerWidth
+* window.open("dot.com"); setTimeout(fn, 1000); alert(); console.log(); confirm(""); 
+* var result = prompt('Your name?'); cl.log(location.href); //url of page. location.assign('url');
+* var el = document.getElementById('articleid'); getElementsbyClassName();
+* cl.log(el.getAttribute('class')); 
+* event handles = <onclick=""  >  event listenrs better cuz event handlers can get overwritten
+* var btn = doc.getelementbyid; btn.addEventListener('click', fn() { cl.log() }); 
+* cl(str.IndexOf('m')); //index where m is in string. also substr(5,9);
+* arguments.length; displays # of args in fn.  arguments[0];
+* promises avoid fn callback hell.  use .then .then etc.
+* ele.innerHTML = "test"; to set html of an element
+* events on elements: main = doc.getlementid('main'); main.onmouseenter = function() { change bg color}
+* problem with js: sometimes works on some browses, not on other browsers. jquery is better
+* bower is nuget for javascript. client side nuget.  
+* bower needs bower.json config file.  lists all dependencies. updates scripts automatically
+
+* jquery events: var main = $('#main'); main.on("click", function(){ main.style=""});
+* toggleClass('sidebar') and hideClass('sidebar') and .text("mytext");
+
+
+* map: takes object and returns data structure.  eg: underscore
+ _.map(stops, function(item) { return { lat: item.lat } });
+* another form of IIFE: (function() { })();
+* input a number: var age = Number(prompt("what is your age?"))
+* div id="output".  just use output.innerHTML = "hi". no need for jquery wrapper. (not always works)
+* closure = fn called in scope it was declared not scope of which it's invoked.
+* closer: fn testscope(){var scope ='local'; fn innerFn(){return scope;} return innerFn;}
+* var innerFunc = testScope(); var answer = innerFunc(); // call function that's returned. local var
+* is STILL in scope and returns 'local'. scope of orig call is STILL valid.  
+* coalesce = automatic conversion.  1=="1".//true
+* don't specify return t ype on fns.  eg: function foo() { return "";}
+* interfaces are duck typing in js. duck typing is wlaks like duc, smells like duck; eg: fn send(r){
+var to = r.email} can send object with email property or fn with email property. fn customer(){this.email}
+var c = new Customer(); send(c);
+* namespaces (func(ns){ }(window.nathan = window.nathan||{}))); everything is nathan ns.
+* require.js downloads scripts as needed. speeds up page.  specify startup script along witih require.js
+* datepicker: add class 'needs-datepicker' to controls then wire $(".needs-dp").datePicker();
+* ondelete = onclick="return confirmDelete();" where confirmDelete is a fn making confirm call
+* checkboxes: $("#selectallcheckbox").click(){ if (this.checked) button is checked
+* $('.ckb').each(function(){ this.checked = true;} // make all checkboxes checked
+* get IDs into array for ajax call: checkedIds = $(".ckb").filter(":checked").map(function()
+{ return this.id;}};  $.ajax(etc. data: {Ids: checkedIds.toArray(), Status:"A"
+data is json object with name Ids: and then array of Ids. ie: Ids: [1,2,3];
+* traditional: true; sets jquery to send arrays using old style that mvc expects
+* location.reload(); - on success, just reload page and refill with new updated data.
+* on mvc side: ajax actoin is ApproveRejctAll(List<int> Ids, string Status); //mvc maps json ids and status
+to those parameters.
+* modal loading dialog: $(document).ajaxStart(function() { {$("#loading").show(); //modal}
+ $(document).ajaxStop(function() { $("#loading").hide(); }
+* two methods events: attribute <button onclick="javascript" or JS code myButton.onclick = fn() { }; 
+* window.onload = fucntion() { }; js event 
+* inline styles: doc.getlementbyid("join).style.left="0px";
+* bad: mixing javascript with html <a href="javascript: someFunction()" use onclick and return false;
+
+* fn can either do something (return { ..}) or have name/value pairs like objects.
+* call: var speak =fn(white){ }// speak.call(saySomething, SaySoimething.normal); saysomethign = what,
+saysoimething.normal = this; var saysomething = { normal: 'meow', love: 'purr'} apply=pass []
+* arguments[] array accessible in functions. console.log(plus(2,2)); //2 parameters. arg.length;
+* iife = vars within in it are private.  
+* ajax.beginform REQUIRES jquery * ms unobtrusive ajax
+* ajax.beginform requires div, ajaxoptions and then REPLACES that div with the ajax call (partialview).
+* get value in jquery : $("#message").val(); 
+* jquery ajax: handler on form element's submit. make call.  replace div with response in done fn
+* delay response after ajax call.  
+* form is valid? in click: var $theForm = $(this); //jquery object. if ($theform.valid()){ajax};
+* serialize form to send as json : $theForm.serialize(); for ajax calls data parameter.
+* access form names on post : request.form["customername"]\
+
+* receive json from $.get call: iterate over it for (var j =0; j<customers.length){ var newrow = 
+"tr" + customers[i].CustomerCode + "</td>".  then add to table. tbl.append(newRow);
+* jquery.validate.js and jquery.validate.unobtrusive.js
+* multiple buttons 1) have multipe forms 2) javascript use onclick="Save();" where save() has jquery post 
+* stringify: takes object and converts to string
+* json.parse(string).  takes string and makes into object. var start ='{"favcolor":"green"}';
+
+* get target: $(".class").click(function(e){ var link = $(e.target); } use target property to get element
+then link.attr("data-gig-id"); attr is jquery method. or use $link to remmeber it's jquery object
+* $(this).remove(); in .done(function(){ } of ajax promise method. 
+ex: link.parents("li").fadeOut(function(){ $(this).remove(); }  method chaining.
+* .include for lambda needs using system.data.entity. load nav. properties
+* $.getJSON also another ajax function. $.getJson("/api/notif", function(notifications){
+ $(".js-notf").text(notifications.length).removeClass("hide"); //hide bs class to hide
+* make element shorter : style="width:300px" attribute.  inline css.
+
+* pass service to iife: var gigsctrl = fn(attendanceService){ return { }}(AttendanceService);
+* js objects - literal object or function style. when want to create many instances - fn.  when singleton
+use literal.  can't do new with literal object.  literals are global object.
+* use data- attr to store custom data in elements.  data-cust-id="@customer.Id" $(this).attr("dat-")
+* efficient jquery code: $("#customers").on("click", ".js-delete", function (e) {
+* toastr.success("Rentals successfully recorded.");
+* jquery validate.  add methods then .validate :    $.validator.addMethod("validCustomer", function() {
+    return vm.customerId && vm.customerId !== 0;  }, "Select a valid customer"); looks for data-rule
+* vm = { movieIds: [] }; //reset viewModel
+* closure: function within a function (enclosed). return function. closurs help create oop concept in js

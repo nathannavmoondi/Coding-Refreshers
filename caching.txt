@@ -1,0 +1,34 @@
+in page title
+
+<%@ OutputCache Duration="30" VaryByParam="None"%>
+
+-- page is cached for 30 seconds before recreating.  Test with label showing datetime.
+
+* VaryByParam caches on whether parameter is the same.
+
+* cache profile in web.config
+
+<caching>
+<outputcachesettings>
+<outputcacheprofiles>
+<add name="querypage" duration="20" varybynam, etc./>
+
+then specify profile in pages:
+
+<%@ OutputCache CacheProfile="QueryPage"
+
+** TO PREVENT ALL OF PAGE TO BE CACHED.  Some parts regenerated.
+
+1) Create Substitition Control.
+2) set MethodName 
+3) Create MethodName function in codebheind. (string GetRealTimeStamp( HttpContext context) return DateTime.Now.ToString()).
+4) Shows current time.
+
+
+** Data Caching
+cache["x"] = ds;
+
+** SQL SERVER
+
+When we cache data from database, the data remains in the cache until it’s source is modified in the database. With the help of this we can improve the performance of ASP.NET applications to the large extent and can also solve the problem of ASP.NET distributed cache scenarios. 
+http://www.dotnetfunda.com/articles/article1382-how-to-implement-sql-caching-in-aspnet-poll-based-sql-cache-dependency.aspx

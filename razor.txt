@@ -1,0 +1,280 @@
+hello <%#=name %> becomes
+
+hello @name
+
+available in ASP.NET MVC 3 and VS 2010. MVC 3 needs .NET 4.0
+
+<p>Single line If</p>
+@if(result != ""){
+    <p>Result: @result</p>
+}
+
+* in cshtml file
+
+variables:
+@{
+  var title = "My awesome blog";
+}
+
+lists:
+@{
+ var animals = new List<string>();
+ animals.Add("dog");
+
+}
+
+HELPER METHODS
+
+loops:
+@animals[1]
+
+@foreach (var animal in animals)
+{
+@animal
+}
+
+href:
+<a href="@Href("~/about.cshtml")">About</a>
+determine correct URL on site.
+
+convert:
+
+@value.IsBool()
+@value.IsEmpty()
+@value.AsInt()
+@value.AsFloat()
+@value.AsBool()
+
+helper methods custom:
+
+@helper NavigationItem(string name, string page)
+{
+  <a href="@page">@name</a>
+}
+
+then call
+@NavigationItem("Home", "index.html")
+
+functions custom:
+
+@functions{
+ protected int Add(int first, int second) {
+  return first+second;
+ }
+}
+
+@Add(3,4)
+
+-------
+
+Layout:
+
+@{
+ Layout = "~/layout.cshtml";
+}
+
+* layout pages need to be paired with content pages to be useful
+
+Layout page has common elements like head, body, footer, etc.  
+
+1) Create layout cshtml
+2) Insert @RenderBody() in layout html
+3) Create index.html with content.  Add Layout = "layout.cshmtl" line.
+
+
+RenderSection:
+
+in layout page, add @RenderSection("Header", required: boolean) line.  
+
+Now in content page add @section Header { html } section.
+
+------
+
+PartialViews:
+
+@RenderPage("partial.cshtml");
+
+can create partial view as a 'template' and then call it with data like a function.
+
+@RenderPage("partial.cshtml", new {
+ Author="Owner",
+ Title = "My title",
+})
+
+use @PageData["Author"] and @PageData[Title"] in partial view page.
+
+---------
+
+ASP .NET WEb Helpers Libary - install from admin program.
+
+Lotsa cool stuff:
+
+@Video.Silverligth("temp.xap", 800,600);
+@Twitter.Tweetbutton(url: Request.url.tostring, Tweetext: "This is a great site");
+@Facebook.LikeButton();
+
+---------
+
+Databases:
+
+@{
+  var db = Database.Open("blog");
+  var posts = db.Query("Select * from custers");
+
+  @foreach(var post in posts)
+  { 
+   post.Name
+  }
+}
+
+DataGrid:
+  
+ var grid = new WebGrid(posts, rowsperpage: 3);
+
+Execute:
+
+ db.Execute("insert into customers (author, etc.)", newpost.author, newpost.title, etc.).
+
+---------
+
+Datetime
+
+@(DateTime.Now)
+
+--------
+
+Forms
+
+<form method="post">
+
+ <label for="author">Author</label>
+ <select name="Author">
+ @foreach(var post in db.query("select distcitn author from posts")) {
+  <option>@post.Author</option>
+ }
+ </select>
+ 
+ <label for="date">Date:</label>
+ <input type="text" name="Date" />
+
+</form>
+
+* Receive data from postbacks
+
+@{
+  var newpost = new {
+ Author = Request["Author"],
+ Content = Request["Content"]
+}
+
+@newpost.Author  // empty if nothing posted
+
+@if(IsPost)   // hide section if page not being posted
+{
+
+}
+
+-------------
+
+validation:
+
+if (Request["Author"].IsEmpty()) {
+ ModelState.Error("Author", "Please specify an error");
+}
+
+@if(IsPost && ModelState.IsValid)
+{
+}
+
+---------
+
+Recaptcha:
+
+@ReCaptcha.GEtHtml();
+
+
+-------
+
+Application functions:
+
+create _ AppStart.cshtml
+
+@{
+  Recaptcha.Publickey = "@*#$@#$@$@$JAEKrfjaksd";
+}
+
+-------
+
+AllPageProcessing:
+
+_PageStart.cshtml   runs once before every page.
+
+ex:
+
+@{
+  layout = "layout.cshtml";
+}
+
+------
+
+Email:
+
+@if(IsPost){
+  Webmail.smtpserver = 
+  WebMail.Username = 
+  WebMail.Send(to: requets["to"], subject: "Hello user", body : Request["body"]);
+  etc.
+ 
+}
+
+----------
+
+Authentication:
+
+WebSecurity.RequreAuthenticaedUser(); // can also place in _placestart.cshtml in that folder.
+
+create user
+
+WebSecurity.CrateUserAndAccount(); // use in page that is posted to from user account creatin page.
+
+-----------
+
+Redirect:
+
+Response.Redirect("page.cshtml");
+
+------
+
+Caching:
+
+simple method:
+Response.OutputCAche(10) // 10 seconds.  Put at top of page.  Verify with @DateTime.Now
+
+fancier method, cache one value:
+if (WebCache.Get("FirsTTime")== null)
+ WebCache.Set("FirstTime", DAteTime.Now, minutestocache: 1, slidingexpirationg: false);
+
+@WebCache.Get("FirstTime")
+--------
+
+Session:
+
+@if(IsPost) {
+ Sessoin["MyValue"]  = Requested["UpdatedValue"]
+}
+
+@Session["MyValue"];
+
+---------
+
+WebMatrix Reporting:
+
+can run a repot to find "errors" on your site, ex: broken link.
+
+---------
+
+Gogole Analytics Helper:
+
+@Analytics.GetGoogleHtml("UA-XXXX");
+
+-----------

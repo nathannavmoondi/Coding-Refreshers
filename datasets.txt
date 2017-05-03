@@ -1,0 +1,7 @@
+create new item
+
+"datasets"
+
+pick table, etc. creates .xsd
+
+tableadapters are designer generated components and have more functionality than dataadapters.

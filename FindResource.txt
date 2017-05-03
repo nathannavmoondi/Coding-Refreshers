@@ -1,0 +1,11 @@
+HistoryDataSet ds;
+
+ds = ((HistoryDataSet)(this.FindResource("historyDataSet"))):
+
+ta = new HistoryDataSetTableAdapters.HistoryTableAdapter();
+
+ta.Fill(ds.History);
+
+CollectionViewSource cvs = ((CollectionViewSource )this.FindResource("historyViewSource")));
+
+cvs.View.MoveCurrenToFirst();

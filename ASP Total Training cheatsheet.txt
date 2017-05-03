@@ -1,0 +1,691 @@
+convert = string s = Convert.ToString(x);
+
+or x.ToString("d");
+
+-----
+
+constants
+
+const int Xray = 55;
+
+-------
+
+int x = 5;
+
+switch(x)
+{
+
+case 1: label.text = "1"; break;
+case 2: label.text = "2"; break
+else: label.text = "3"; break;
+}
+
+-----
+
+do
+{
+}while (z < 4);
+
+---------
+
+for (int x = 3; x <3; x++)
+{
+}
+
+-------
+
+MessageBox.Show("hi");
+
+-------
+
+try
+{
+ throw new Exception("there is a problem");
+}
+catch (Exception ex)
+{
+}
+
+--------
+arrays:
+
+int[] arr = new int[8];
+int[] arr2 = new int[3] {1, 2, 3, 4};
+
+arr.Length, arr.Sum(),arr.Max(), arr.Min(), GetUpperBound(0), ElementAt(3)
+
+-------
+collectoins:
+Lists, Sorted Lists [key,value], Queues (sequential processing), Stacks (FIFO)
+
+Typed Collection
+List <int> ie: List<int> numbers = new List<int>();
+numbers.Insert(3), numbers.Add(3); numbers[i];
+
+foreach (int x in numbers) { x; }
+
+if (listString.Contains("test"))
+
+------
+SortedList
+
+SortedList<string, int> m1 = new <SortedList<string, int>(3);
+
+m1.Add("Plates, 32); 
+
+foreach(KeyValuePair<string, int> r in ml)
+{ r.key, r.value }
+
+int x = m1["Plates"];
+m1.Remove("Plates");
+
+------
+
+DateTime
+
+DateTime m1 = new DateTime(2009, 06, 22);
+
+m1 = DateTime.Parse("6/22/09");
+
+DateTime x = DateTime.Now ; DateTime y = DateTime.Today;
+
+x.ToLongDateString(); x.ToShortDateString();
+
+DateTime n1 = m1.AddDays(30); // AddMonths(30), AddYears(30);
+
+------
+
+public string myproperty
+{
+ get 
+ { return name;
+ }
+ set
+ { name = value;
+ }
+}
+
+------
+
+structures
+
+like classes, but cannot inherit. uses less memory.  a "value".   great for smal amounts of data.  or to include in classes (or api standards for passing around).
+
+public struct Packet
+{
+ int day;
+ int value;
+}
+
+Packet p = new Packet();
+
+-------
+
+constructors:
+
+class Animal
+{
+ public Animal()
+ {
+   name = "Jack";
+ }
+// destructors are ~
+}
+
+-------
+
+delegate: pointer to method.
+
+public delegate int DoMath(int x, int y); // same parameters
+
+DoMath d = new DoMath(Add);  // where ADd is a actual function implementation
+result = a(3,4);  // keep changing to where delegate points to.
+
+-------
+
+xamal is like .aspx html markup page for windows applications.
+
+-------
+
+application resources available in xaml (app.xaml).  add "styles" apply to controls
+
+download "styles" from expression blend website. (rollover animated buttons, etc.).
+
+----
+
+WebClient class.  Great for sending/receiving intrenet url/data.
+
+var wc = new WebClient(); 
+wc.DownloadStringCompleted+= (auto generate handler)
+wc.DownloadStringAsync( new Uri(url) );
+
+//handler browser.NavigateToString(e.Result);
+
+-----
+
+*.sdf - great local databases u can include.
+
+------
+
+vb has "modules" and Sub Main()
+
+------
+
+reading files : FileStream fs = new FileStream();
+
+------
+c++ / // cout, cin, int _tmain(int arc)
+
+-------
+
+code snippets - very handy (press tab twice used with intellisense)
+
+create snippets - extension manager, install "snippet designer" extension.
+
+save in \documents\vs\code snippets\visual c#\my code snipets
+--------
+
+refactor: make code better.  right-click, refactor - or use tools.
+
+going back and "bettering" code.
+
+-------
+
+code generators.  like codesmith.  craete templates with tokens - cg then creates files.  VS has cg called T4 (*.tt creates *.cs)
+
+----
+
+wpf is slicker and cooler UI's.  Cross between asp and winforms. Build rich ui windows apps.  http://msdn.microsoft.com/en-us/library/aa970268.aspx
+
+-------
+
+document outline - shows great view of your page/form.
+
+------
+
+database projects - check out to see schemas and update local db's
+
+use schema compare to check local and production dabases. also "data compare" tool.
+
+--------
+
+linq - query language for C#.  
+
+var q = from o in orders where o.Frieght < 100.00M; //linq to sql
+
+-----
+
+easy reading dataa: open connection, issue cmd, create reader, iterate through reader, close.
+
+----
+
+dataadpters. needed if u want to fill datasets. create da & ds, setup da & ds, fill "table".
+
+----
+
+typed datasets - have schema, properties (fields), own table adapter and table object.
+
+------
+
+drag & drop tables.  can set controls for fields
+
+--------
+
+MS Test Manager - works with TFS.  Test code also contains lab center (virtual environments, simulate diff. environments).
+
+Create "Test Project" and use "Assert" to test returns.  Run tests and see if they pass.   Also do 'performance and load tests' (need ultimate edition).
+
+Web Test Recorder.  Run script, do you test of website, saves keystrokes, run test many times.
+
+------
+
+Expressions Blend library - gives cool options like drag & dropping, grahics, etc.
+
+------
+
+setup project.  add new 'setup project' and then add dialogs, add files, create shortcut and build .msi file.
+
+-----
+
+clickonce.  creates a URL location that is checked to see if program needs to be updated.  if so, program is updated. need to 'sign' the cickonce manifest first (properties). file is (.application).  run 'publish wizard'.
+
+------
+
+Publish ASP - Build, Publish Web.  Use File System, Web Deploy or FTP.  Use with IIS.  IIS connect as your user.
+
+------
+
+non-web applications.  properties, genreate a 'settings' file.
+
+--------
+
+iterate through listbox
+
+foreach(ListItem in ListBox.Items)
+{
+ result += string.Format(" {0}={1}", item.Text, Item.Selected);
+}
+
+-------
+
+(protected) override - needed to create new methods for base classses (eg: page)
+
+---------
+
+OnPreRender.  Tidy up controls just before they render.
+
+------
+
+= string.Empty // to empty a text box or string
+
+----------
+
+Systems.Collections.Generic; // for collections
+
+Dictionary key and value eg:
+
+private Dictionary<string, ListItem[]> regionData;
+
+regionData = new Dictionary<string, ListItem[]> ();
+
+regionData["Americas"] = new ListeItem[] {
+new ListItem["USA"], new ListItem["Canada"]
+};
+
+------
+
+start learning html5 and sharepoitn integration with vs
+
+-------
+
+javascript GREAT for real-time validation of controls
+
+OR
+
+add custom validator function (that runs true or false) and hook that in.
+
+Check (Page.IsValid)
+
+------
+
+string passed = Request.QueryString["username"];
+
+---
+
+sitemap - add web.sitemap file
+
+then create sitemap datasource
+
+then create menu/treeview
+
+-----
+
+error pages.  create custom page and set in web.config
+
+------
+
+appsettings - set values u need in app.
+use: ConfigurationSettings.AppSettings["CopyrightMessage"];
+
+<connectionStrings>
+<add name="NorthwindConnection" connectionSTring="Datasource=localhost; integrated security=SSPI; Initial Catalog=northwind; uid=user" />
+</connectionStrings>
+
+-------
+
+Asp.net configurainto - wbsite, asp.net configuratino.  set security and configuration settings.
+
+----
+
+Trace - add "Trace=True" in page top.  Or add to web.config
+
+Trace.Write(""); trace.axd
+
+------
+
+web.config.comments - tells you all the stuff u can add to web.config with comments
+
+------
+
+add assemblies
+
+<assemblies>
+<add assembly="System.Messaging">
+</assemblies>
+
+or make permanent by modifying web.config in .net directory
+
+-------
+
+add component/class
+
+-- add in references
+-- add "Using MyLIbrary" in code.
+-- reference Class and propeties
+
+---------
+
+web service.  each ws has to have it's own unique namespace.
+
+have WebMethods using SOAP.  Add ?WDSL after .asmx to read xml.
+
+Add WebServcice in 'current solution'.
+
+syntax:
+
+localhost.service proxy = new localhost.service();
+proxy.HelloWorld();
+
+----
+
+databinding:
+
+<%# statement %>
+
+statements 7+4, variables, methods, DateTime.Now, 
+
+Page.DataBind();
+
+* bind to a LIST
+
+statenames = new List<string<();
+statenames.Add("Alabama, AL");
+listbox.DataSource = stateNames; // set data text field & datavalueField;
+
+DataBind();
+
+3 ways: bind to value, statement; bind to collection, list and then bind to datasource.
+
+
+-----
+
+grid: bind to datasource or list.
+
+DataKeyName = Primary Key for each row
+
+1) enable section? click checkbox (creates new commandfieldrow). Then set selectedrowstyles.  Create handler for "SelectedIndexChanged"
+
+2) in handler.  can cancel if needed (e.cancel = true).  Get e.NewSelectedIndex.   Get Rows[newIndex].Cells[column index].Text; (or .SelectedDataKey and SelectedRow.Cells)
+
+use DataKey[x] to access Primary Key
+
+-------
+
+(master/detail) gridview + details gridview.  two datasources.  second data source uses "selecteddatakey.value" as where clause for second query.  first has a 'selectedvalue' command.
+
+------
+
+grid templates - add controls, etc. to a column (add templatefield)
+
+add label, click 'edit bindings' then bind to some field
+
+------
+
+
+formview - more controls over presentation
+
+------
+
+login failed for user '\ASPNET'
+
+go to sql server, add that user to database security.
+
+1) add login under 'sql server/security/logins'
+2) add user under 'database/security/users'.  Add permissions.
+
+-----
+
+themes: createa .skin file and add
+
+<asp:Textbox Forecolor="Red" Backcolor="Yellow"> to overwrite all textboxes.
+
+add SkinID
+
+add <pages theme="foldername"> to add theme to all pages in web.config
+
+---
+
+master pages
+
+*.master - look like aspx page.
+
+important: have contenteplaceholder control. 
+
+around contentplaceholder - throw in stuff u always want. eg: a table.
+
+1) for slaves: put "masterPageFile="~/MasterPage.master" in top directive.
+
+2) delete all html, head, body aform and div elements.  ONLY provide controls.
+
+3) enclose all content in a "<Asp:Content id="content1" contentplaceholderid="content" runat="server"> element
+
+-------
+
+master pages titles
+
+in directive: <%@ Page Title="Suppliers Information"" ..
+
+--
+
+user controls
+
+create folder \usercontrols
+add 'properties' which you can set in the directive (eg: Heading='Title')
+
+1st method - add "handlers" in control which can be declared in directive (handle events in parent page raised by user control eg: OnAccepted="Accepted")
+
+2nd method - handlers, do it programatically. Take usercontrol.handler += MyNewHandler() (in Page_Load area).  Then write code in that method.
+
+-------
+
+ViewState[""] = xx.text; // exists lifetime of page cycle
+
+-------
+
+iterate table
+
+foreach(HtmlTableRow row in Table1.Rows)
+{
+	foreach (HtmlTableCell cell in row.Cells)
+	Control control = cell.Controls[0];
+	if (control is Textbox)
+	{
+		ViewState[control.id] = ((TextBox)control).Text;)
+	}
+}
+
+-------
+
+serialize - to serialize data, put [serializable] in class
+
+[Serializable]
+public class MyClass
+{
+then can convert to byte stream and copy to ViewState. ViewState["x"] = travelplanclass;
+
+-------
+
+viewstate can be encryped : "ViewStateEncryptionMode="True/Auto"
+
+------
+
+cookies
+
+//new cookie
+Http cookie = new HttpCookie("User Info");
+cookie["Username"] = username;
+cookie.Expires = DateTime.Now.AddMonths(1);
+Response.Cookies.Add(cookie):
+
+// try to get cookie
+HttpCookie cookie = new Request.Cookies["UserInfo"]; // cookie name
+if (cookie != null)
+	string username = cookie["Username:]; // cookie property
+
+------
+
+session - great way to exchange data between pages
+
+-------
+
+databases:
+
+creat folder for access for db eg: \ProductsDataAccess
+
+create classes in there (eg: ConnectionManager)
+
+--------
+
+SqlConnection connection = new SqlConnection(connectionString);
+
+connection.Open(); return connection;
+
+---------
+
+add to web.config
+
+<appSettings>
+	<connectionSTrings>
+		<add name="NorthwindConnectionSTring" connection strign="x">
+
+then
+
+ConfigurationManager.ConnectionSTrings["NorthWindConnection"].ConnectionSTring;
+
+sometimes use using(SqlConnection..) { } block
+
+------
+
+sqlcommand:
+
+sqlcommand cmd = new Sqlcommand(sql, connection);
+cmd.commandtype = commandtype.text/storedprocedure
+cmd.Paramaters.Add("@ProductID", SqlDBtype.Int).Value = 5; // for sp
+
+cmd.executescalar(), cmd.executenonquery(), cmd.executereader()
+
+SqlDataReader = cmd.executereader(CommandBehavoir.CloseConnection);
+
+-----
+
+using sqldatareader
+
+using ( SqlDataReader reader = Products.GetAllPrices())
+{
+	while (reader.Read())
+	{
+		string productName = reader.GetString(0);
+	}
+}
+
+-------
+
+static in function name so you don't need to create an instance of that class
+
+------
+
+don't always use sqldatasource - maintain separate4ion of ui and data 
+layer.  
+
+Use data class objects (ie: use objectdatasource to select class and then select methods for select/update/insert/delete).  All which return sqldatareader.
+
+
+----------
+
+DataView
+
+master detail - use dataview for second.
+
+buttonclick select code:
+DataView view1 = new DataView(ds.Tables["Products"];
+view1.Sort = 'Unitprice';
+view1.RowFilter = "UnitPrice <20 and DIscontinued = 0";
+CheapProductGridView.DataSource = view1; // bind
+
+
+-------
+
+DataRelations
+
+setup relations between two ds's.
+
+DataRelation relation = new DataRelation("Products_OrderDetails", ds.tables['products'].columns['productid'}, etc.)
+
+ds.relations.add(relation);
+
+--------
+
+caching
+
+1) outputcaching
+directive: <@% Output Duration="3" %> //or VaryByParam="none"/"CatoregoyID"
+
+add to web.config <caching><outputcachesettings><outputcatchprofiles><add 
+name="querypage"/>
+
+2) datacaching
+
+Cache["x"] 
+
+-------
+
+resource files:
+
+create reosurce, add strings, then handle them
+
+NameLabel.Text = Resources.MyStrings.NameLabelText;
+
+--------
+
+datasets:
+
+DataSet ds = new DataSet();
+SqlDAtaAdapter adapter = new SqlDataAdapter("select *");
+adapter.Fill(ds, "Products"); create table and throw into ds
+
+foreach(DataRow row in ds.Tables["Product"].Rows)
+{
+	string str = string.Format("{0}", row["ProductID"]);
+
+}
+
+DataRow[] cheapRows = ds.Tables["Product"].SElect("UnitPrice < 20");
+
+----------
+
+datasets allow sorting in gridview while sqldatareader doesn't
+
+-------
+
+Authentication:
+
+web.config
+
+<authentication mode="Windows/Forms/Passport"
+<forms name ="MyAuthCookie" loginurl="login.aspx" timeout="30">
+ <credentials passwordofmrat="clear">
+	<user name = "Andy" password="hello"> etc.
+
+</></></>
+
+create login.aspx
+
+1) drag login compoentnet
+2) use code:
+if (FormsAuthentication.Authenticate(username, passwored) //check
+	FormsAuthentication.RedirectFromLOginPage(username, false); // create cookie to persist?
+
+3) go to IIS, website config, set off 'anonymous access' and 'forms authentication'.
+4) Turn on 'integrated authentication' for intranet access and auto windows login.
+
+---------
+
+Authorization:
+
+web.config
+
+<authorization>
+<deny users="?"> // deny all unloggedin users to all pages 
+</>
+
+------------

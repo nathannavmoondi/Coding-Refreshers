@@ -1,0 +1,55 @@
+UNIT TEST
+
+* only test code that contains logic statements.  if something is true or false. some calculation (eg: >80).
+
+1) Go Test Menu
+2) Select C#
+3) Select Unit Test (bookunittest).  Crates UnitTesting project.
+
+[TestMethod] identifier.
+
+** ALSO create Unit Test Wizard.  Allows you to select class and methods.  Creates better class.
+
+Write your code.  Then do ASSERT.
+
+book b = new book();
+b.price = 30;
+b.update(10M);
+assert.arequal<decimal>(10M*.05M, b.price);
+
+or
+
+if (x != 5)
+ throw new argumentoutofrange("bad value");
+
+// add [ExpectedException(typeof(ArgumentOutOfRangeException))] if it's expected.
+
+4) Now RUN tests.  Check reuslts.
+
+LOAD TEST (or performance testing)
+
+1) Add 'web performance test' crates new project.
+
+2) Runs 'web test recorder' gets launched in browser.
+
+3) run pages, click links, etc.  stop recording.
+
+4) Create as many web perromance tests as you want.  
+
+5) Create LOAD TEST type
+
+6) Type scenario, pick # of users, add tests created above, type of network, duration time.
+
+-----
+
+testing
+
+web performance test project
+* record a session
+* run it many times and watch performance
+
+Unit Testing
+* create project
+* pick function
+* have function have asserts, return true/false, etc.
+* run tests and analyze results.

@@ -1,0 +1,207 @@
+udemy mosh
+
+using system;
+namespace myprogram{
+	public class Program{
+           static void Main(string[] args)
+               { Console.WriteLine("Hi")}
+ }
+}
+
+----
+variable - name given to storage location in memory.  constant = immutable
+const float i = 3.14f; //const's must be set to value
+lower case for locals.  Pascal for classes
+primitive types: int, byte, char, long, float, boolean, double
+overflowing = 255+1=0; compiler won't compile if over limit
+implicit conversion: byte b = 1; int i = b; 000001 becomes 00000 000001
+explicit conversoin: float f = 1.0f; int i = (float)f; // we are aware of data loss but ok
+string conversion: string s = "1"; int i = convert.toint32(s); or int j = int.Parse(s);
+try{ }catch(Exception e) { cw(e.message)} finally{ }
+logical operators (true/false) : &&, !!, !. === value and type must be equal
+non-primitive: classes. var person = new Person();  structs not used much.  new creates memory.
+class members: fields public int person; or public void MakePerson() { }; () or ;
+arrays: int[] num = new int[3]; type[] to denote array. then new with size.  must specify size.
+arrays: init values int[] numbers = new int[3]{ 1, 2, 3};  easier: jsut use var. num[0] = 1; 3 is optional, ie: []
+lists do not need to know size at runtime.
+array: array = fixed size.  list = dynamic size.
+math.ceiling: get highest number. round up.
+add char to string: string t=""; t+=c; //c is char
+
+strings: var name = string.Format("{0} {1}", firstName, lastName); // format method
+string.Join method: string.Join(" ", arrayNames);
+
+enum: public enum ShippingMethod { regular=1, extra=2};
+ShippingMethod sm = ShippingMethod.regular; or var sm = ShippingMethod.regular;
+
+reference types: primitive(value) types and reference types.  
+  ref takes up heap memory.  referance is a memory location. gcollector removes reference types not used
+  var arr1=new int[3]{1,2,3}; var arr2 = arr1; arr2[0] = 0;  both arrays index 0 is 0.
+
+conditional: if (..) { } else { }
+switch(enum.value){ case sm.regular: cw.("HI"); break; case sm.extra break; default: break; }
+iteration: for(var i=1; i<10; i++) { }
+foreach : var name="Hi"; foreach(var char in name) { cw(char); } easier than for loop
+while(true condition) { }
+random = class generates random #
+
+lists: generic types.  
+var num = new List<type>(); eg: var nums = new List<int>(){1,2,3,4}; .add, .remove, .addrange, .indexof(1),.count
+
+dates: var dt = new DateTime(many overloads); eg: new DateTime(2015,1,1); 
+DateTime.Now is a STATIC method of dt.  results DT object.  var now = DateTime.Now; var today = DateTime.Today;
+cw(now.minute);
+string props: now.ToLongDateString(); .ToShortDateString, .ToString("MM-dd-YYYY");
+
+strings: substring
+var index = fullName.IndexOf(' '); var firstName = fullName.Substring(0, index); var names= fn.Split(' ');
+stringbulider.  sb.Append('-',10); sb.AppendLine(); sb.Remove(0,10); faster for many stirng operations and take memory
+
+static methods can only call other static methods.  like public static void Main(string[] args) calls fns.
+static = only one method exists shared by everyone
+
+debugging: locals window. you type in vars.  autos window = vstudio decides what vars you may be interested in
+errors: if (err) throw new Exception("An error occured"); goes up stack.
+
+---- intermediate
+
+constructors: this or base.  call own constuctor or bases
+object initialization vs constructor: var person = new Person{ firstName = "John"}; parameterless constructor is 
+ called first
+
+out vs ref: ref = memory location sent. out = var will be modified: out must be specified in both caller and method.
+readonly = safety. set at init then can't be new'd agani: readonly var nums = new List<int>();
+private fields set with _ prefix. private string _firstName;
+
+indexers = access elemnets of class values (list) via a [int] access.  var num = Scores[1]; class is like an array
+good exmaple: cookie.  cookie["name"] = "Mosh"; var name = Cookie["name"];
+declare: public string this[string key]{ get{ return dictionary[key]; set {..} } note: use of this and string key
+
+classes: inheritance.  get methods/props of another class.
+composition: another class is a property within a class. ex: set in constructor to private field.  
+favor composition over inheritance.  multi inheritance not allowed in C#
+example: public class Installer{ private Logger _logger; public Installer(Logger logger){ _logger = logger; }
+problem inheritance: change base.  all descd's change. eg: animal has walk fn now.  fish derives from animal.
+to fix: add interfaces like animal, walkable.  dog derives from both. fish derives from animal, swimable
+
+protected = only accessible from this class and derived classes
+use base() to call base's constructor and not recreate the wheel
+upcasting/downcasting: Circle circle = new Circle(); Shape shape = circle; upcasting.
+boxing/unboxing: make copy of value to ref type. then ref to value type.  stack to heap.  
+
+method overrides: use virtual keyword then override in derived class. can change implementation
+abstract = can't be "new'd".  must be derived.  all abstrct everyting = interface. zero implemntations
+sealed = cna't be derived or overridden
+
+interfaces. great for testability.
+public mytest(IProcess process) // can pass any iprocess object
+mytest class is not tied to any derived Process object.  you can pass in any iprocess derived class
+tests: arrange, act, assert. name = method_condition_resultexpected.
+interefaces not for multi-inheritance cuz interfaces contain NO code. 
+
+Polymorphism: "classes have diff functionality but share common interfaces."
+Example: private IList<INotification> _notifs = new ..
+ then in constrctor.  caller passes in an IList object.  .Add to _notifs. Call them all.
+Polymorphism = takes many forms.  shape has .draw method.  circle, square, etc. has own .draw.  Call .draw calls 
+ the right method.  no drawsquare(), drawcircle().  
+ create list of vehicles.  add bike, car, truck.  iterate and call each obj's move function. it calls right one.
+
+---advanced
+
+Generics: Use T 
+Example: public class GenericList<T> where T : Class{ }
+then public void Add(T value) { } 
+then var nums = new GenericList<int>();
+
+Delegates.  Pointer to function.
+define delegate. public delegate (then signature of method) void PhotoFilterHandler();  this is now a TYPE
+public PhotoFilterHandler filterHandler;  // Can set this to a function.
+use += to add more functions that can be called in a chain.  Simliar to code behind VB.
+
+instead of using custom delegate.  can use delegates that come with .NET.  2 generic delegates: system.action & func
+func<params, out> out = what is returned.  actions return void.
+instead of PhotFilterHandler filterHandler, use Action<Photo> filterHandler.  action<> easier than custom delegate
+
+lambda = anonymous method.  no return statement. 
+example: use delegate: Func<int, int> square = num => num*num;  cw(square(5));  create func delegate with lambda.
+linq: var cheapBooks = books.FindAll(book => book.Price < 10); //predicate where clause. books = List object.
+linq used on lists.
+
+events = communication between objects.  used for loosely coupled applictions. extend apps
+example: video encoder. publisher.  fires event to encode.  subscriber handles event.
+#1 create delegate. public delegate void VideoEncodeHandler(object source, EventArgs);
+#2 public event VideoEncodedHandler VideoEncoded; // of type delegate above
+#3 Create event protected virtual void OnVideoEncoded() { VideoEncoded(this, EventArgs.Empty); }
+#4 Fire event.  In Encode method: OnVideoEncoded();
+#5 In another class: create method: public void OnVideoEncoded(object source, EventArgs e) { }
+#6 Set event handler to this new method: videoEncoder.VideoEncoded += mailService.OnVideoEncoded();
+now that event gets called by video encoder when encoding.
+
+Extension Methods: Add methods to class without changing source code
+Create static class. Then create static extension method: public static class StringExtensions{ }
+public static string Shorten(this String str, int numOfWords) { }.  Always use THIS operator.
+Add extension class to using first.  then use.
+Expression<Func<etc. = you can use lambda
+
+nullable types.  eg: bool cna't be null. but sometimes you want it to be null.  eg: database.  set date to null
+DateTime? date = null;
+use date.HasValue to see if it's not null.  Be aware of GetValueOrDefault() in case null.
+DateTime date2 = date ?? DateTime.Today; //if is null tertiary operator
+dynamic. resolves type at runtime.  
+var passed = status==1 ? true : false; ternary operator
+using = way to dispose object automatically.  ensure it does.
+
+Casting:
+a+b/2 = ((double)a + b) / 2;
+char.IsDigit(c); // check if digit
+value types: bool, byte, char, decimal, double, float, int, long 
+Console.WriteLine($"{description}", description); // like string.format()
+
+if (x < 5) method() else if (x < 5) method2(); else { method3(); }
+two ways arrays :   var scores = new int[4]{2,3}; or  int[] ages = {2, 3}; or var ages = new int[]{2,3}; multi dimension: int[,] x;
+  always use a [] somewhere.
+pillars: encapsulation(hide complexity), inheritance (use existing), polymorphism (shape, circle, square draw method)
+with abstrct.  make all membes abstract and you have an interface
+common interfaces: ienumerable, idispoable, icomparable
+
+gc does not free up stack memory, close db and files
+nunit uses testfixtureattribute as attribute
+global assembly dll - put in machine.config and put path to devpath env variable
+convert.tostring(str) handls nulls but str.ToString() does not
+managed code targets clr
+dispose only deletes memory
+can change value of variable while debugging
+ngen used to compile managed assemblies
+server object to process different server paths
+constructors must return void
+shadowing is created by using new operator
+you can derive from abstract class but not instantiate it
+master page merged with content page early on
+two dimensional array = int[,] myArray;
+structs passed by value
+polymorphism means multiple forms but one name
+boxing is encapsulating a copy of a value type in an object
+clr = type safety, can't access unauthorized memory, launch sep process and gc
+kill session = session.abandon()
+system.uint16 = unsigned itneger to 65k.  short is same.
+assembly versioning prevent dll hell = specify name and version
+gang of 4 : abstract, singleton, builder, factory
+can invoke gc explicitly
+uniqueid session generated stored on server.
+classes can reference static and non static variables.
+session id's stored in cookies
+structs are value types.  on stack.
+enums can only be used with ints.  vip = 1,etc.
+readonly gets assigned value at runtime in declaration or constructor
+predicate is a where.  returns boolean
+var's datatype is set at compile time
+
+method overloading = methods with same name but diff arguments.  overriding same name.same arguments
+shallow copy only copies structure. deep copy copies everything.
+boxing is encapsulating a copy of a value type in an object
+debug only for debug builds while trace for all builds
+sizeof = size of data type
+structures can have methods, fields, indexers, constructurs, not destructors, no define custom const.
+structures cannot inherit other structues, can't be abstract/virutal, nor implement interfaces
+* = create pointer to variable
+* unary - ++ or --

@@ -1,0 +1,34 @@
+create web service.
+
+invoked via soap and wsdl.
+
+add service reference to another project.  pick name eg; servicereference.
+
+code:
+
+ ServiceReference1.ServiceSoapClient proxy = new ServiceReference1.ServiceSoapClient();
+
+ string greeting = proxy.HelloWorld();
+
+to call.
+
+
+filename: asmx
+
+[WebService(Namespace="MyCompany")]
+
+[WebMethod]
+public string HelloWorld()
+{
+  return "Hello World";
+}
+
+xml: service.asmx?WDSL  get wsdl definition for soap message.
+
+USING
+
+(after adding via web reference)
+
+localhost.service proxy = new localhost.service();
+
+string s = proxy.HelloWorld();

@@ -1,0 +1,19 @@
+configuration
+
+appsettings (ConfigurationManager.AppSettings["CopyrightMessage"]);
+
+connectionstrings
+
+SYSTEM.WEB
+
+authenciation mode
+
+customerrors
+
+trace enabled=true
+
+
+/SYSTEM.WEB
+
+/CONFIGURATION
+
